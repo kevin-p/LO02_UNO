@@ -1,4 +1,4 @@
-package com.lo02.UNO.core;
+package com.lo02.UNO.core.cartes;
 
 public enum Label {
 	ZERO ("0", 0),
