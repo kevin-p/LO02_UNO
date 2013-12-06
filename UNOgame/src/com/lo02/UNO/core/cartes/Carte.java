@@ -5,8 +5,5 @@ public class Carte {
 	private Couleur couleur;
 	private Label label;
 	
-	
-	public void action(){
-		
-	}
+	public void action() {}
 }
