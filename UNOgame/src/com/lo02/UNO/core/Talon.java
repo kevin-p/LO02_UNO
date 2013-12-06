@@ -15,7 +15,7 @@ public class Talon extends ArrayList<Carte> {
 		
 	}
 	
-	public static Talon getInstancePioche() {
+	public static Talon getInstanceTalon() {
 		
 		if (SingleTalon == null)
 			SingleTalon = new Talon();
