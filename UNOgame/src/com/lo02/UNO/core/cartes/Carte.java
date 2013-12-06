@@ -18,6 +18,17 @@ public class Carte {
 	}
 	
 	public void action() {}
+	
+	public boolean isPosableSur(Carte carte) {
+		if (carte.getCouleur() == this.couleur)
+			return true;
+		if (carte.getCouleur() == Couleur.NOIR)
+			return true;
+		if (carte.getLabel() == this.label)
+			return true;
+		else
+			return false;
+	}
 
 	public Couleur getCouleur() {
 		return couleur;

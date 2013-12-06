@@ -40,6 +40,9 @@ public class Pioche extends ArrayList<Carte> {
 		return SinglePioche;
 	}
 	
+	public Carte getLast() {
+		return this.get(size()-1);
+	}
 	
 	public ArrayList<Carte> piocher (int nbCarte) {
 		ArrayList<Carte> cartes = new ArrayList<Carte>();

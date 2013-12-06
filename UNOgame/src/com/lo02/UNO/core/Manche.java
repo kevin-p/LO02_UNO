@@ -2,6 +2,8 @@ package com.lo02.UNO.core;
 
 import java.util.ArrayList;
 
+import com.lo02.UNO.core.cartes.Carte;
+
 public class Manche {
 
 	private int sens = 1;
@@ -34,6 +36,17 @@ public class Manche {
 	public void distribuerCarte () {
 		for (Joueur j : joueurs) {
 			j.piocher(7);
+		}
+	}
+	
+	public boolean poserCarte(Carte carte, Joueur joueur) {
+		if (!carte.isPosableSur(pioche.getLast())) {
+			joueur.piocher(2);
+			return false;
+		}
+		else {
+			talon.add(carte);
+			return true;
 		}
 	}
 	

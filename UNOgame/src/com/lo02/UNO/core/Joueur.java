@@ -28,6 +28,10 @@ public class Joueur {
 		mainJoueur.addAll(pioche.piocher(nbCarte));
 	}
 	
+	public void poser(int IndexCarte) {
+		
+	}
+	
 	public void AfficherMain() {
 		for(Carte carte : mainJoueur) {
 			System.out.print(" | " + carte.getLabel()+ ":" + carte.getCouleur());
