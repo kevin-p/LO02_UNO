@@ -3,7 +3,6 @@ package com.lo02.UNO.core;
 import com.lo02.UNO.core.cartes.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 public class Pioche extends ArrayList<Carte> {
@@ -39,6 +38,17 @@ public class Pioche extends ArrayList<Carte> {
 			SinglePioche = new Pioche();
 		
 		return SinglePioche;
+	}
+	
+	
+	public ArrayList<Carte> piocher (int nbCarte) {
+		ArrayList<Carte> cartes = null;
+		for(int i = 0; i < nbCarte; ++i) {
+			cartes.add(this.get(this.size()-1));
+			this.remove(this.size()-1);
+		}
+		
+		return cartes;
 	}
 }
 
