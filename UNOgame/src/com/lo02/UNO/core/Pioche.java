@@ -42,7 +42,7 @@ public class Pioche extends ArrayList<Carte> {
 	
 	
 	public ArrayList<Carte> piocher (int nbCarte) {
-		ArrayList<Carte> cartes = null;
+		ArrayList<Carte> cartes = new ArrayList<Carte>();
 		for(int i = 0; i < nbCarte; ++i) {
 			cartes.add(this.get(this.size()-1));
 			this.remove(this.size()-1);

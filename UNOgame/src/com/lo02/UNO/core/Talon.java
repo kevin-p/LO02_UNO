@@ -24,6 +24,10 @@ public class Talon extends ArrayList<Carte> {
 		
 		return SingleTalon;
 	}
+	
+	public Carte getDerniereCarte() {
+		return this.get(this.size() - 1);
+	}
 
 	public Couleur getCouleurJeu() {
 		return couleurJeu;

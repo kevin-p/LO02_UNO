@@ -15,10 +15,10 @@ public class CarteFactory {
 		case PLUS4:
 			carte = new Plus4();
 			break;
-		case SENSINTERDIT:
+		case SINT:
 			carte = new SensInterdit(couleur);
 			break;
-		case CHANGERSENS:
+		case CHSENS:
 			carte = new ChangerSens(couleur);
 			break;
 		default:

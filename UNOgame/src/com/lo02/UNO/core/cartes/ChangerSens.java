@@ -4,7 +4,7 @@ public class ChangerSens extends Carte{
 	
 	public ChangerSens (Couleur couleur) {
 		this.setCouleur(couleur);
-		this.setLabel(Label.CHANGERSENS);
+		this.setLabel(Label.CHSENS);
 	}
 	
 	public void action () {

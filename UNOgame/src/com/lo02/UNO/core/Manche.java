@@ -13,6 +13,10 @@ public class Manche {
 	
 	public Manche (ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
+		
+		creerTalon();
+		creerPioche();
+		distribuerCarte();
 	}
 	
 	public void changeSens () {
@@ -31,6 +35,10 @@ public class Manche {
 		for (Joueur j : joueurs) {
 			j.piocher(7);
 		}
+	}
+	
+	public void recupererCartes () {
+		//recupérer les cartes des joueurs
 	}
 
 	public Joueur getJoueurCourant() {

@@ -12,8 +12,8 @@ public enum Label {
 	HUIT ("8", 8),
 	NEUF ("9", 9),
 	PLUS2 ("+2", 10),
-	SENSINTERDIT ("Sens interdit", 10),
-	CHANGERSENS ("changement sens", 10),
+	SINT ("Sens interdit", 10),
+	CHSENS ("changement sens", 10),
 	JOKER ("joker", 20),
 	PLUS4 ("+4", 20);
 	
