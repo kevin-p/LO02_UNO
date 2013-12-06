@@ -14,15 +14,20 @@ public class Talon extends ArrayList<Carte> {
 	private Couleur couleurJeu = Couleur.NOIR;
 
 	private Talon() {
-		
+		this.add(new SpecialCarte());
+//		System.out.println(this.size());
 	}
 	
-	public static Talon getInstanceTalon() {
+	public synchronized static Talon getInstanceTalon() {
 		
 		if (SingleTalon == null)
 			SingleTalon = new Talon();
 		
 		return SingleTalon;
+	}
+	
+	public synchronized static Talon reset() {
+		return SingleTalon = new Talon();
 	}
 	
 	public Carte getLast() {

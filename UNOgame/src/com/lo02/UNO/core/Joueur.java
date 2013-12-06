@@ -1,7 +1,5 @@
 package com.lo02.UNO.core;
 
-import java.util.ArrayList;
-
 import com.lo02.UNO.core.cartes.Carte;
 
 public class Joueur {
@@ -22,9 +20,14 @@ public class Joueur {
 		this.mainJoueur.addAll(joueur.mainJoueur);
 	}
 	
+	public void detruireMain () {
+		mainJoueur = new MainJoueur();
+	}
+	
 	public void piocher(int nbCarte) {
+//		System.out.println("recup instance");
 		Pioche pioche = Pioche.getInstancePioche();
-		
+//		System.out.println("joueur pioche");
 		mainJoueur.addAll(pioche.piocher(nbCarte));
 	}
 	

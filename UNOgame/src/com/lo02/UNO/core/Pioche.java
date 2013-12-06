@@ -32,12 +32,16 @@ public class Pioche extends ArrayList<Carte> {
 		Collections.shuffle(this);
 	}
 	
-	public static Pioche getInstancePioche() {
+	public synchronized static Pioche getInstancePioche() {
 		
 		if (SinglePioche == null)
 			SinglePioche = new Pioche();
 		
 		return SinglePioche;
+	}
+	
+	public synchronized static Pioche reset() {
+		return SinglePioche = new Pioche();
 	}
 	
 	public Carte getLast() {

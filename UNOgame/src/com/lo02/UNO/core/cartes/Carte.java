@@ -19,12 +19,16 @@ public class Carte {
 	
 	public void action() {}
 	
+	public boolean isPosableSur(SpecialCarte carteSpecial) {
+		return true;
+	}
+	
 	public boolean isPosableSur(Carte carte) {
-		if (carte.getCouleur() == this.couleur)
+		if (this.couleur == carte.getCouleur())
 			return true;
-		if (carte.getCouleur() == Couleur.NOIR)
+		else if (this.couleur == Couleur.NOIR || carte.getCouleur() == Couleur.NOIR)
 			return true;
-		if (carte.getLabel() == this.label)
+		else if (this.label == carte.getLabel())
 			return true;
 		else
 			return false;

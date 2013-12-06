@@ -30,21 +30,38 @@ public class Test {
 		joueurs.add(new Joueur("Ano2"));
 		joueurs.add(new Joueur("Ano3"));
 		
-		Manche manche = new Manche(joueurs);
+//		System.out.println("creation manche");
+		Manche manche = Manche.getInstanceManche();
+//		System.out.println("fin creation manche");
+		manche.setJoueurs(joueurs);
+		manche.distribuerCarte();
+//		System.out.println("fin affectation joueurs");
+		
 		for (Joueur joueur : joueurs) {
 			joueur.AfficherMain();
 			System.out.print("\n");
 		}
+	}
+	
+	public static void TestSpecialCarte () {
+		Pioche pioche = Pioche.getInstancePioche();
+		Talon talon = Talon.getInstanceTalon();
 		
+		Carte carte = pioche.piocher(1).get(0);
 		
+		if(carte.isPosableSur(talon.getLast()))
+			System.out.println("OK");
+		else
+			System.out.println("Fail");
 		
 	}
 	
 	public static void main(String[] args) {
-		//TestLabel();
-		//TestCouleur();
-		//TestPioche();
+		TestLabel();
+		TestCouleur();
+		TestPioche();
 		TestDistribution();
+		TestSpecialCarte();
 	}
 
 }
