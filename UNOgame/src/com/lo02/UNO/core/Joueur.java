@@ -27,6 +27,38 @@ public class Joueur {
 		mainJoueur = new MainJoueur();
 	}
 	
+	public void jouer() {
+		//a modifier au moment de l'écriture de l'interface graphique
+		int numCarte = 0;
+		
+		System.out.println(this.nom + " choisissez la carte à poser (nombre de 1 à " + mainJoueur.size() + ") : ");
+		InputStreamReader lecteur = new InputStreamReader(System.in);
+		BufferedReader entree = new BufferedReader(lecteur);
+		try {
+			numCarte = entree.read();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		if(numCarte >= 1 && numCarte <= mainJoueur.size()) {
+			poser(numCarte - 1);
+		}
+		else {
+			piocher(1);
+			
+			System.out.println(this.nom + " choisissez la carte à poser (nombre de 1 à " + mainJoueur.size() +
+								") ou 0 pour passer : ");
+			try {
+				numCarte = entree.read();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(numCarte >= 1 && numCarte <= mainJoueur.size())
+				poser(numCarte - 1);
+		}
+	}
+	
 	public void piocher(int nbCarte) {
 //		System.out.println("recup instance");
 		Pioche pioche = Pioche.getInstancePioche();
@@ -69,6 +101,10 @@ public class Joueur {
 			if(choix == "JAUNE" || choix == "J" || choix == "j")
 				return Couleur.JAUNE;
 		}
+	}
+	
+	public int getNbCarte() {
+		return mainJoueur.size();
 	}
 	
 	public String getNom() {

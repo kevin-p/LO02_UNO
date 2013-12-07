@@ -41,7 +41,20 @@ public class Manche {
 	}
 	
 	public void lancerManche() {
+		joueurCourrant = designerPremierJoueur(joueurs.size());
 		
+		boolean mancheFinie = false;
+		
+		do {
+			joueurs.get(joueurCourrant).jouer();
+			AvancerJoueur();
+			
+			//remplacer ça par un système de levé d'exception
+			for (Joueur j : joueurs) {
+				if(j.getNbCarte() == 0)
+					mancheFinie = true;
+			}
+		}while(!mancheFinie);
 	}
 	
 	
