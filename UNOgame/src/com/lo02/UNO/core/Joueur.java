@@ -2,6 +2,7 @@ package com.lo02.UNO.core;
 
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
+import com.lo02.UNO.core.cartes.Label;
 
 import java.util.*;
 
@@ -107,6 +108,24 @@ public class Joueur {
 			return false;
 	}
 	
+	public boolean isLegitimePlus4(){
+		boolean legitime=true;
+		Talon talon = Talon.getInstanceTalon();
+		for(Carte carte : mainJoueur) {
+			if(carte.getLabel()!= Label.PLUS4 && carte.isPosableSur(talon.getLast())){ // compare toutes les cartes sauf les +4
+				legitime=false;
+			}
+		}
+		return legitime;
+		
+	}
+	
+	public void compterPoint(){
+		
+		for(Carte carte : mainJoueur) {
+			point+=carte.getLabel().valeur();
+		}
+	}
 	public int getNbCarte() {
 		return mainJoueur.size();
 	}

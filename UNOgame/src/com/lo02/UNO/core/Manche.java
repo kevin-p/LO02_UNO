@@ -55,6 +55,10 @@ public class Manche {
 					mancheFinie = true;
 			}
 		}while(!mancheFinie);
+		
+		for (Joueur j : joueurs) {
+			j.compterPoint();
+		}
 	}
 	
 	
@@ -62,7 +66,7 @@ public class Manche {
 //		System.out.println("haut du tas");
 //		talon.getLast().afficher();
 //		System.out.println(" | fin haut du tas");
-		
+
 		if (!carte.isPosableSur(talon.getLast())) {
 			joueur.piocher(2);
 			System.out.println("carte rejeté");

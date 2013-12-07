@@ -2,8 +2,14 @@ package com.lo02.UNOTest;
 
 import java.util.ArrayList;
 
-import com.lo02.UNO.core.cartes.*;
-import com.lo02.UNO.core.*;
+import com.lo02.UNO.GUI.ConsoleUI;
+import com.lo02.UNO.core.Joueur;
+import com.lo02.UNO.core.Manche;
+import com.lo02.UNO.core.Pioche;
+import com.lo02.UNO.core.Talon;
+import com.lo02.UNO.core.cartes.Carte;
+import com.lo02.UNO.core.cartes.Couleur;
+import com.lo02.UNO.core.cartes.Label;
 
 public class Test {
 
@@ -75,6 +81,16 @@ public class Test {
 		manche.lancerManche();
 	}
 	
+	public static void TestDemarage(){
+		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+		ConsoleUI vue = new ConsoleUI();
+		int nombreJoueur = vue.nombreJoueur();
+		
+		for (int i=0;i<nombreJoueur;i++){
+			joueurs.add(new Joueur(vue.nomerJoueur(i)));
+		}
+	}
+	
 	public static void main(String[] args) {
 //		TestLabel();
 //		TestCouleur();
@@ -82,6 +98,7 @@ public class Test {
 //		TestDistribution();
 //		TestSpecialCarte();
 		TestManche();
+		TestDemarage();
 		
 	}
 
