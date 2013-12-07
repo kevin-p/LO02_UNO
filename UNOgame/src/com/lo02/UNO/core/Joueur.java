@@ -66,7 +66,7 @@ public class Joueur {
 	
 	public void poser(int IndexCarte) {
 		Manche manche = Manche.getInstanceManche();
-		
+		mainJoueur.get(IndexCarte).action(manche, this);
 		if(manche.poserCarte(mainJoueur.get(IndexCarte), this))
 			mainJoueur.remove(IndexCarte);
 	}

@@ -19,7 +19,7 @@ public class Pioche extends ArrayList<Carte> {
 			if(c != Couleur.NOIR){
 				for (Label l : Label.values()) {
 					
-					Carte carte = new Carte(CarteFactory.getCarte(l, c));
+					Carte carte = CarteFactory.getCarte(l, c);
 					this.add(carte);
 					
 					if(l != Label.ZERO && l != Label.PLUS4 && l != Label.JOKER) {

@@ -20,8 +20,11 @@ public class Test {
 	
 	public static void TestPioche () {
 		Pioche pioche = Pioche.getInstancePioche();
-		for (Carte carte : pioche)
-			System.out.println(carte.getCouleur() + " : " + carte.getLabel().label());
+		for (int i = 0; i < pioche.size(); ++i)
+		{
+			System.out.println(pioche.get(i).getCouleur() + " : " + pioche.get(i).getLabel().label());
+			System.out.println(pioche.get(i));
+		}
 	}
 	
 	public static void TestDistribution () {

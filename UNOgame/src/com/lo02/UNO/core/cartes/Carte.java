@@ -20,7 +20,9 @@ public class Carte {
 		this.setLabel(label);
 	}
 	
-	public void action (Manche manche, Joueur joueur) {}
+	public void action (Manche manche, Joueur joueur) {
+		System.out.println("pas d'action");
+	}
 	
 	public void afficher() {
 		System.out.print(" | " + label+ ":" + couleur);

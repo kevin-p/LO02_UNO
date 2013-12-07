@@ -11,7 +11,12 @@ public class Plus2 extends Carte{
 	}
 	
 	public void action (Manche manche, Joueur joueur) {
+//		System.out.println("je suis action special de plus2");
 		manche.getJoueurSuivant().piocher(2);
 		manche.AvancerJoueur();
+	}
+	
+	public void action () {
+		System.out.println("action plus2");
 	}
 }
