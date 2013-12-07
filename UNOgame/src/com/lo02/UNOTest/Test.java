@@ -56,12 +56,30 @@ public class Test {
 		
 	}
 	
+	public static void TestManche() {
+		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+		joueurs.add(new Joueur("Ano1"));
+		joueurs.add(new Joueur("Ano2"));
+		joueurs.add(new Joueur("Ano3"));
+		
+//		System.out.println("creation manche");
+		Manche manche = Manche.getInstanceManche();
+//		System.out.println("fin creation manche");
+		manche.setJoueurs(joueurs);
+		manche.distribuerCarte();
+//		System.out.println("fin affectation joueurs");
+		
+		manche.lancerManche();
+	}
+	
 	public static void main(String[] args) {
-		TestLabel();
-		TestCouleur();
-		TestPioche();
-		TestDistribution();
-		TestSpecialCarte();
+//		TestLabel();
+//		TestCouleur();
+//		TestPioche();
+//		TestDistribution();
+//		TestSpecialCarte();
+		TestManche();
+		
 	}
 
 }

@@ -3,7 +3,7 @@ package com.lo02.UNO.core;
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
 
-import java.io.*;
+import java.util.*;
 
 public class Joueur {
 	
@@ -30,29 +30,27 @@ public class Joueur {
 	public void jouer() {
 		//a modifier au moment de l'écriture de l'interface graphique
 		int numCarte = 0;
+		Scanner sc = new Scanner(System.in);
+		
+		Talon talon = Talon.getInstanceTalon();
+		talon.getLast().afficher();System.out.println();
+		
+		AfficherMain();
 		
 		System.out.println(this.nom + " choisissez la carte à poser (nombre de 1 à " + mainJoueur.size() + ") : ");
-		InputStreamReader lecteur = new InputStreamReader(System.in);
-		BufferedReader entree = new BufferedReader(lecteur);
-		try {
-			numCarte = entree.read();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		numCarte = sc.nextInt();
+		System.out.println(numCarte + ":" + mainJoueur.size());
 		if(numCarte >= 1 && numCarte <= mainJoueur.size()) {
 			poser(numCarte - 1);
 		}
 		else {
 			piocher(1);
 			
+			AfficherMain();
+			
 			System.out.println(this.nom + " choisissez la carte à poser (nombre de 1 à " + mainJoueur.size() +
 								") ou 0 pour passer : ");
-			try {
-				numCarte = entree.read();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			numCarte = sc.nextInt();
 			
 			if(numCarte >= 1 && numCarte <= mainJoueur.size())
 				poser(numCarte - 1);
@@ -75,22 +73,17 @@ public class Joueur {
 	
 	public void AfficherMain() {
 		for(Carte carte : mainJoueur) {
-			System.out.print(" | " + carte.getLabel()+ ":" + carte.getCouleur());
+			carte.afficher();
 		}
+		System.out.println();
 	}
 	
 	public Couleur choisirCouleur() {
 		//à changer pour fontionner de pair avec l'interface graphique
+		Scanner sc = new Scanner(System.in);
 		for (;;) {
 			System.out.println(this.nom + " choisissez une couleur (ROUGE/R/r, BLEU/B/b, VERT/V/v, JAUNE/J/j");
-			InputStreamReader lecteur = new InputStreamReader(System.in);
-			BufferedReader entree = new BufferedReader(lecteur);
-			String choix = new String();
-			try {
-				choix = entree.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			String choix = sc.nextLine();
 			
 			if(choix == "ROUGE" || choix == "R" || choix == "r")
 				return Couleur.ROUGE;
@@ -101,6 +94,17 @@ public class Joueur {
 			if(choix == "JAUNE" || choix == "J" || choix == "j")
 				return Couleur.JAUNE;
 		}
+	}
+	
+	public boolean isContestPlus4() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println(this.nom + " contestez vous un Plus4 ? (OUI/O/o : ");
+		String choix = sc.nextLine();
+		if(choix == "OUI" || choix == "O" || choix == "o")
+			return true;
+		else
+			return false;
 	}
 	
 	public int getNbCarte() {

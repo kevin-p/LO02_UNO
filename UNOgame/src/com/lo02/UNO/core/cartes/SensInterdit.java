@@ -11,5 +11,6 @@ public class SensInterdit extends Carte{
 	
 	public void action (Manche manche, Joueur joueur) {
 		manche.AvancerJoueur();
+		System.out.println("avancer joueur");
 	}
 }

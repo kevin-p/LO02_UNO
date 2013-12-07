@@ -22,8 +22,8 @@ public class Carte {
 	
 	public void action (Manche manche, Joueur joueur) {}
 	
-	public boolean isPosableSur(SpecialCarte carteSpecial) {
-		return true;
+	public void afficher() {
+		System.out.print(" | " + label+ ":" + couleur);
 	}
 	
 	public boolean isPosableSur(Carte carte) {

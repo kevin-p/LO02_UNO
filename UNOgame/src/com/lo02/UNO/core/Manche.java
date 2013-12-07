@@ -59,13 +59,19 @@ public class Manche {
 	
 	
 	public boolean poserCarte(Carte carte, Joueur joueur) {
-		if (!carte.isPosableSur(pioche.getLast())) {
+//		System.out.println("haut du tas");
+//		talon.getLast().afficher();
+//		System.out.println(" | fin haut du tas");
+		
+		if (!carte.isPosableSur(talon.getLast())) {
 			joueur.piocher(2);
+			System.out.println("carte rejeté");
 			return false;
 		}
 		else {
 			talon.add(carte);
 			carte.action(this, joueur);
+			System.out.println("carte acceptée");
 			return true;
 		}
 	}
