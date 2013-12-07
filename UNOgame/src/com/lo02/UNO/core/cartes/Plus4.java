@@ -11,6 +11,8 @@ public class Plus4 extends Carte{
 	}
 	
 	public void action (Manche manche, Joueur joueur) {
-		
+		manche.getJoueurSuivant().piocher(2);
+		this.setCouleur(joueur.choisirCouleur());
+		manche.AvancerJoueur();
 	}
 }

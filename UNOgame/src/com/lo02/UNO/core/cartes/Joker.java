@@ -11,6 +11,6 @@ public class Joker extends Carte{
 	}
 	
 	public void action (Manche manche, Joueur joueur) {
-		
+		this.setCouleur(joueur.choisirCouleur());
 	}
 }
