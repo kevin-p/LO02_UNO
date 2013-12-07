@@ -1,5 +1,8 @@
 package com.lo02.UNO.core.cartes;
 
+import com.lo02.UNO.core.Joueur;
+import com.lo02.UNO.core.Manche;
+
 public class Carte {
 	
 	private Couleur couleur;
@@ -17,7 +20,7 @@ public class Carte {
 		this.setLabel(label);
 	}
 	
-	public void action() {}
+	public void action (Manche manche, Joueur joueur) {}
 	
 	public boolean isPosableSur(SpecialCarte carteSpecial) {
 		return true;

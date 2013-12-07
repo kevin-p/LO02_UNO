@@ -1,5 +1,8 @@
 package com.lo02.UNO.core.cartes;
 
+import com.lo02.UNO.core.Joueur;
+import com.lo02.UNO.core.Manche;
+
 public class Joker extends Carte{
 	
 	public Joker() {
@@ -7,7 +10,7 @@ public class Joker extends Carte{
 		this.setLabel(Label.JOKER);
 	}
 	
-	public void action () {
+	public void action (Manche manche, Joueur joueur) {
 		
 	}
 }

@@ -50,9 +50,9 @@ public class Test {
 		Carte carte = pioche.piocher(1).get(0);
 		
 		if(carte.isPosableSur(talon.getLast()))
-			System.out.println("OK");
+			System.out.println("Special carte OK");
 		else
-			System.out.println("Fail");
+			System.out.println("Special carte Fail");
 		
 	}
 	

@@ -1,5 +1,8 @@
 package com.lo02.UNO.core.cartes;
 
+import com.lo02.UNO.core.Joueur;
+import com.lo02.UNO.core.Manche;
+
 public class Plus4 extends Carte{
 	
 	public Plus4() {
@@ -7,7 +10,7 @@ public class Plus4 extends Carte{
 		this.setLabel(Label.PLUS4);
 	}
 	
-	public void action () {
+	public void action (Manche manche, Joueur joueur) {
 		
 	}
 }

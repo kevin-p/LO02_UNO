@@ -52,6 +52,7 @@ public class Manche {
 		}
 		else {
 			talon.add(carte);
+			carte.action(this, joueur);
 			return true;
 		}
 	}

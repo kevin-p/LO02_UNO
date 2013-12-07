@@ -41,6 +41,10 @@ public class Joueur {
 		}
 	}
 	
+	public void choisirCouleur() {
+		
+	}
+	
 	public String getNom() {
 		return nom;
 	}
