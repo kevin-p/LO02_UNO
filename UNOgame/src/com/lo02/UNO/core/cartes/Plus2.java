@@ -15,8 +15,4 @@ public class Plus2 extends Carte{
 		manche.getJoueurSuivant().piocher(2);
 		manche.AvancerJoueur();
 	}
-	
-	public void action () {
-		System.out.println("action plus2");
-	}
 }

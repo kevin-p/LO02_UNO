@@ -25,8 +25,9 @@ public class Plus4 extends Carte{
 			}
 		}
 		else{
-		manche.getJoueurSuivant().piocher(4);
-		this.setCouleur(joueur.choisirCouleur());
-		manche.AvancerJoueur();}
+			manche.getJoueurSuivant().piocher(4);
+			this.setCouleur(joueur.choisirCouleur());
+			manche.AvancerJoueur();
+		}
 	}
 }

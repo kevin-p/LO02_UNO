@@ -38,11 +38,13 @@ public class Joueur {
 		
 		AfficherMain();
 		
-		System.out.println(this.nom + " choisissez la carte Ã  poser (nombre de 1 Ã  " + mainJoueur.size() + ") : ");
+		System.out.println(this.nom + " choisissez la carte Ã  poser (nombre de 1 à  " + mainJoueur.size() + ") : ");
 		numCarte = sc.nextInt();
 		System.out.println(numCarte + ":" + mainJoueur.size());
 		if(numCarte >= 1 && numCarte <= mainJoueur.size()) {
+//			System.out.println("juste avant poser carte");
 			poser(numCarte - 1);
+//			System.out.println("juste après poser cate");
 		}
 		else {
 			piocher(1);
@@ -67,7 +69,6 @@ public class Joueur {
 	
 	public void poser(int IndexCarte) {
 		Manche manche = Manche.getInstanceManche();
-		mainJoueur.get(IndexCarte).action(manche, this);
 		if(manche.poserCarte(mainJoueur.get(IndexCarte), this))
 			mainJoueur.remove(IndexCarte);
 	}

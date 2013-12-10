@@ -74,7 +74,9 @@ public class Manche {
 		}
 		else {
 			talon.add(carte);
+//			System.out.println("juste avant l'action");
 			carte.action(this, joueur);
+//			System.out.println("juste après l'action");
 			System.out.println("carte acceptee");
 			return true;
 		}
