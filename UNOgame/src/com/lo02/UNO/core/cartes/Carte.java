@@ -54,4 +54,6 @@ public class Carte {
 	public void setLabel(Label label) {
 		this.label = label;
 	}
+	
+	
 }

@@ -73,6 +73,10 @@ public class Joueur {
 			mainJoueur.remove(IndexCarte);
 	}
 	
+	public void addCarte(Carte carte){
+		mainJoueur.add(carte);
+	}
+	
 	public void AfficherMain() {
 		for(Carte carte : mainJoueur) {
 			carte.afficher();
