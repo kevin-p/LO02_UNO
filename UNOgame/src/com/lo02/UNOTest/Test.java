@@ -98,7 +98,7 @@ public class Test {
 //		TestDistribution();
 //		TestSpecialCarte();
 		TestManche();
-		TestDemarage();
+//		TestDemarage();
 		
 	}
 

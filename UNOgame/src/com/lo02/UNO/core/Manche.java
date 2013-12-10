@@ -49,7 +49,7 @@ public class Manche {
 			joueurs.get(joueurCourrant).jouer();
 			AvancerJoueur();
 			
-			//remplacer ça par un système de levé d'exception
+			//remplacer par exception
 			for (Joueur j : joueurs) {
 				if(j.getNbCarte() == 0)
 					mancheFinie = true;
@@ -69,13 +69,13 @@ public class Manche {
 
 		if (!carte.isPosableSur(talon.getLast())) {
 			joueur.piocher(2);
-			System.out.println("carte rejeté");
+			System.out.println("carte rejetee");
 			return false;
 		}
 		else {
 			talon.add(carte);
 			carte.action(this, joueur);
-			System.out.println("carte acceptée");
+			System.out.println("carte acceptee");
 			return true;
 		}
 	}
