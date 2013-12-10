@@ -85,14 +85,14 @@ public class Joueur {
 		for (;;) {
 			System.out.println(this.nom + " choisissez une couleur (ROUGE/R/r, BLEU/B/b, VERT/V/v, JAUNE/J/j");
 			String choix = sc.nextLine();
-			
-			if(choix == "ROUGE" || choix == "R" || choix == "r")
+			System.out.println(choix);
+			if(choix.equals("ROUGE")  || choix.equals("R") || choix.equals("r"))
 				return Couleur.ROUGE;
-			if(choix == "BlEU" || choix == "B" || choix == "b")
+			if(choix.equals("BLEU") || choix.equals("B") || choix.equals("b"))
 				return Couleur.BLEU;
-			if(choix == "VERT" || choix == "V" || choix == "v")
+			if(choix.equals("VERT") || choix.equals("V") || choix.equals("v"))
 				return Couleur.VERT;
-			if(choix == "JAUNE" || choix == "J" || choix == "j")
+			if(choix.equals("JAUNE") || choix.equals("J") || choix.equals("j"))
 				return Couleur.JAUNE;
 		}
 	}
@@ -102,7 +102,8 @@ public class Joueur {
 		
 		System.out.println(this.nom + " contestez vous un Plus4 ? (OUI/O/o : ");
 		String choix = sc.nextLine();
-		if(choix == "OUI" || choix == "O" || choix == "o")
+		System.out.println(choix);
+		if(choix.equals("OUI") ||choix.equals("O") ||choix.equals("o"))
 			return true;
 		else
 			return false;
