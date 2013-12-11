@@ -2,32 +2,89 @@ package com.lo02.UNO.core;
 
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
+import com.lo02.UNO.core.cartes.Joker;
 import com.lo02.UNO.core.cartes.Label;
+import com.lo02.UNO.core.cartes.Plus4;
+import com.lo02.UNOTest.Test;
 
 import java.util.*;
-
+/**
+ * 
+ * Représente et stocke toutes les informations concernant un {@link Joueur}
+ * 
+ * @author Kevin personnic
+ *
+ */
 public class Joueur {
 	
+	/**
+	 * Le nom du {@link Joueur}
+	 * 
+	 * @see #getNom()
+	 * @see #setNom(String)
+	 */
 	private String nom;
+	
+	/**
+	 * Compatabilise le nombre de points d'un {@link Joueur}
+	 * 
+	 * @see #getPoint()
+	 * @see #setPoint(int point)
+	 * @see #compterPoint()
+	 */
 	private int point = 0;
+	
+	/**
+	 * Représsente la main du {@link Joueur} sous le forme d'un objet {@link MainJoueur} qui sotcke les cartes.
+	 * 
+	 * @see #getNbCartes()
+	 * @see #detruireMain()
+	 */
 	private MainJoueur mainJoueur = new MainJoueur();
 	
+	/**
+	 * Constructeur par default de {@link Joueur}
+	 */
 	public Joueur () {}
 	
+	/**
+	 * Constructeur de {@link Joueur}
+	 * 
+	 * @param nom le nom du {@link Joueur}
+	 */
 	public Joueur (String nom) {
 		this.nom = nom;
 	}
 	
+	/**
+	 * constructeur par recopie de {@link Joueur}
+	 * 
+	 * @param {@link Joueur}
+	 */
 	public Joueur (Joueur joueur) {
 		this.nom = joueur.nom;
 		this.point = joueur.point;
 		this.mainJoueur.addAll(joueur.mainJoueur);
 	}
 	
+	/**
+	 * 
+	 * Detruit la {@link #mainJoueur} du {@link Joueur} en replacant sa main acutel par un nouvel objet {@link MainJoueur}
+	 * Est utilisé entre 2 {@link Manche} pour "récupérer" les {@link Carte} non jouées
+	 * 
+	 * @see Manche#reset()
+	 */
 	public void detruireMain () {
 		mainJoueur = new MainJoueur();
 	}
 	
+	/**
+	 * 
+	 * Est appelé par la {@link Manche} afin de faire jouer un {@link Joueur}, fonctionne en mode cli
+	 * Le {@link Joueur} va pouvoir choisir une carte à {@link #poser(int)} dans sa main ou de {@link #piocher(int)}
+	 * 
+	 * @see Manche#lancerManche()
+	 */
 	public void jouer() {
 		//a modifier au moment de l'Ã©criture de l'interface graphique
 		int numCarte = 0;
@@ -60,6 +117,15 @@ public class Joueur {
 		}
 	}
 	
+	/**
+	 * 
+	 * Fait piocher le {@link Joueur} dans la {@link Pioche}.
+	 * 
+	 * @param nbCarte
+	 * @see #jouer()
+	 * @see Manche#distribuerCarte()
+	 * @see Manche#poserCarte(Carte, Joueur)
+	 */
 	public void piocher(int nbCarte) {
 //		System.out.println("recup instance");
 		Pioche pioche = Pioche.getInstancePioche();
@@ -67,12 +133,27 @@ public class Joueur {
 		mainJoueur.addAll(pioche.piocher(nbCarte));
 	}
 	
+	/**
+	 * 
+	 * Pose la {@link Carte} à l'Index spécifié de la {@link #mainJoueur} sur le {@link Talon}
+	 * 
+	 * @param IndexCarte {@link Integer} l'index de la carte à poser sur le {@link Talon}
+	 * @see #jouer()
+	 */
 	public void poser(int IndexCarte) {
 		Manche manche = Manche.getInstanceManche();
 		if(manche.poserCarte(mainJoueur.get(IndexCarte), this))
 			mainJoueur.remove(IndexCarte);
 	}
 	
+	/**
+	 * 
+	 * Affiche la {@link #mainJoueur} en mode cli
+	 * 
+	 * @see #jouer()
+	 * @see Plus4#action(Manche, Joueur)
+	 * @see Test#TestDistribution()
+	 */
 	public void AfficherMain() {
 		for(Carte carte : mainJoueur) {
 			carte.afficher();
@@ -80,6 +161,15 @@ public class Joueur {
 		System.out.println();
 	}
 	
+	/**
+	 * 
+	 * Demande au {@link Joueur} de selectionner une {@link Couleur} dans le cas où il a posé un {@link Plus4} ou 
+	 * un {@link Joker}, en mode cli.
+	 * 
+	 * @return {@link Couleur} choisi par le joueur
+	 * @see Plus4#action(Manche, Joueur)
+	 * @see Joker#action(Manche, Joueur)
+	 */
 	public Couleur choisirCouleur() {
 		//Ã  changer pour fontionner de pair avec l'interface graphique
 		Scanner sc = new Scanner(System.in);
@@ -98,6 +188,13 @@ public class Joueur {
 		}
 	}
 	
+	/**
+	 * 
+	 * Demande au {@link Joueur} si il veut contester un {@link Plus4} joué contre lui, mode cli
+	 * 
+	 * @return {@link Boolean} le choix du {@link Joueur}, ture pour oui, false sinon
+	 * @see Plus4#action(Manche, Joueur)
+	 */
 	public boolean isContestPlus4() {
 		Scanner sc = new Scanner(System.in);
 		
@@ -110,6 +207,12 @@ public class Joueur {
 			return false;
 	}
 	
+	/**
+	 * 
+	 * Verifi si le {@link Joueur} avait le droit de poser un {@link Plus4} sur le {@link Talon}
+	 * 
+	 * @return {@link Boolean} true si le plus 4 était légitime, false sinon
+	 */
 	public boolean isLegitimePlus4(){
 		boolean legitime=true;
 		Talon talon = Talon.getInstanceTalon();
@@ -122,28 +225,65 @@ public class Joueur {
 		
 	}
 	
+	/**
+	 * 
+	 * Compte les points de la main d'un joueur et les ajoute aux points du joueur pour la partie courante
+	 * 
+	 * @see Manche#lancerManche()
+	 */
 	public void compterPoint(){
 		
 		for(Carte carte : mainJoueur) {
 			point+=carte.getLabel().valeur();
 		}
 	}
+	
+	/**
+	 * 
+	 * Compte le nombre de cartes du joueur
+	 * 
+	 * @return int le nombre de carte du joueur
+	 */
 	public int getNbCarte() {
 		return mainJoueur.size();
 	}
 	
+	/**
+	 * 
+	 * Renvoi le {@link #nom} du {@link Joueur}
+	 * 
+	 * @return {@link String} le {@link #nom}
+	 */
 	public String getNom() {
 		return nom;
 	}
 	
+	/**
+	 * 
+	 * Change le nom du {@link Joueur} par le nom passé en paramètre
+	 * 
+	 * @param {@link #nom} {@link String} le nouveau {@link #nom} du {@link Joueur}
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 	
+	/**
+	 * 
+	 * Renvoi le nombre de {@link #point} d'un {@link Joueur}
+	 * 
+	 * @return {@link #point} {@link Integer}
+	 */
 	public int getPoint() {
 		return point;
 	}
 	
+	/**
+	 * 
+	 * Modifi le nombre de {@link #point} d'un {@link Joueur}
+	 * 
+	 * @param point {@link Integer} le nombre de {@link #point} du {@link Joueur}
+	 */
 	public void setPoint(int point) {
 		this.point = point;
 	}

@@ -3,6 +3,13 @@ package com.lo02.UNO.core;
 import java.util.ArrayList;
 import com.lo02.UNO.core.cartes.Carte;
 
+/**
+ * 
+ * 
+ * 
+ * @author Kevin
+ *
+ */
 public class MainJoueur extends ArrayList<Carte> {
 	
 	/**

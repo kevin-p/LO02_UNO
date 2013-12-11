@@ -82,6 +82,12 @@ public class Manche {
 		}
 	}
 	
+	public void retournerTalon() {
+		//retourner le talon dès qu'il y a 6 cartes ou moins.
+		//Eparggner la dernière carte du talon qu'il faut remettre au début. redimensionner
+		//reset les cartes
+	}
+	
 	public void changeSens () {
 		sens = sens * -1;
 	}

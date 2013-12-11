@@ -3,7 +3,7 @@ package com.lo02.UNO.core.cartes;
 import com.lo02.UNO.core.Joueur;
 import com.lo02.UNO.core.Manche;
 
-public class Carte {
+public class Carte {//ajouter méthode reset() à implémenter dans le plus4 et le joker
 	
 	private Couleur couleur;
 	private Label label;
