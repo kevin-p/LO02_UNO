@@ -146,6 +146,19 @@ public class Joueur {
 			mainJoueur.remove(IndexCarte);
 	}
 	
+	/***
+	 * 
+	 * Ajoute une {@link Carte} à la {@link #mainJoueur} arbitrairement.
+	 * Utilisé dans le cas où un {@link Plus4} à été joué et contesté à raison pour le {@link Joueur} suivant pour 
+	 * remettre le {@link Plus4} rejeté dans la {@link #mainJoueur}.
+	 * Peut être utilisé à des fin de test ou de triche pour ajouter des {@link Carte} spécifique à un {@link Joueur}.
+	 * 
+	 * @param carte {@link Carte}
+	 */
+	public void addCarte(Carte carte){
+		mainJoueur.add(carte);
+	}
+
 	/**
 	 * 
 	 * Affiche la {@link #mainJoueur} en mode cli

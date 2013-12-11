@@ -54,4 +54,6 @@ public class Carte {//ajouter méthode reset() à implémenter dans le plus4 et le 
 	public void setLabel(Label label) {
 		this.label = label;
 	}
+	
+	
 }
