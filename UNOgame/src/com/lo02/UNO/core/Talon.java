@@ -17,15 +17,31 @@ public class Talon extends ArrayList<Carte> {
 	
 	private static final long serialVersionUID = -3455800499341853695L;
 	
-	
+	/**
+	 * 
+	 * Stocke le singleton de {@link Talon}
+	 * 
+	 */
 	private static Talon SingleTalon = null;
-	private Couleur couleurJeu = Couleur.NOIR;
 
+	/**
+	 * 
+	 * constructeur privé de {@link Talon} car singleton
+	 * 
+	 * @see #getInstanceTalon()
+	 * 
+	 */
 	private Talon() {
 		this.add(new SpecialCarte());
 //		System.out.println(this.size());
 	}
 	
+	/**
+	 * 
+	 * Renvoi une référence sur le singleton de {@link Talon}
+	 * 
+	 * @return {@link #SingleTalon} {@link Talon}
+	 */
 	public synchronized static Talon getInstanceTalon() {
 		
 		if (SingleTalon == null)
@@ -34,22 +50,25 @@ public class Talon extends ArrayList<Carte> {
 		return SingleTalon;
 	}
 	
+	/**
+	 * 
+	 * permet de reconstuire un nouvel objet {@link Talon}
+	 * 
+	 * @return {@link #SingleTalon} {@link Talon}
+	 */
 	public synchronized static Talon reset() {
 		return SingleTalon = new Talon();
 	}
 	
+	/**
+	 * 
+	 * renvoi la dernière {@link Carte} du {@link Talon}
+	 * 
+	 * @return lastCarte {@link Carte}
+	 */
 	public Carte getLast() {
 		return this.get(size()-1);
-	}
-
-	public Couleur getCouleurJeu() {
-		return couleurJeu;
-	}
-
-	public void setCouleurJeu(Couleur couleurJeu) {
-		this.couleurJeu = couleurJeu;
-	}
-	
+	}	
 }
 
 
