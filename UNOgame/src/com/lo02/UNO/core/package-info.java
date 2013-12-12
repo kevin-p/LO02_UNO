@@ -1,7 +1,8 @@
+
 /**
  * 
- */
-/**
+ * regroupe les classes de gestion des mécaniques de jeux
+ * 
  * @author kevin
  *
  */
