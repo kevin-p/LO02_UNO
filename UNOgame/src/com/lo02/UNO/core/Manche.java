@@ -3,8 +3,13 @@ package com.lo02.UNO.core;
 import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 
+import javax.security.auth.callback.LanguageCallback;
+
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.ChangerSens;
+import com.lo02.UNO.core.cartes.Plus2;
+import com.lo02.UNO.core.cartes.Plus4;
+import com.lo02.UNO.core.cartes.SensInterdit;
 
 /**
  * 
@@ -167,6 +172,7 @@ public class Manche {
 	 * @param carte {@link Carte} que le joueur veut poser
 	 * @param joueur {@link Joueur} une réfférence sur le joueur qui joue la {@link Carte}
 	 * @return {@link Boolean} true si la carte est accepté, false sinon.
+	 * @see Joueur#poser(int)
 	 */
 	public boolean poserCarte(Carte carte, Joueur joueur) {
 //		System.out.println("haut du tas");
@@ -256,6 +262,7 @@ public class Manche {
 	 * 
 	 * @param nbJoueurs
 	 * @return IndexJoueur {@link Integer} l'index du premier {@link Joueur} à jouer parmis les {@link #joueurs}
+	 * @see #lancerManche()
 	 */
 	public int designerPremierJoueur(int nbJoueurs) {
 		return (int)(Math.random() * nbJoueurs);
@@ -298,6 +305,8 @@ public class Manche {
 	 * Renvoi le {@link Joueur} qui jouera après le {@link #joueurCourrant}
 	 * 
 	 * @return {@link Joueur}
+	 * @see Plus2#action(Manche, Joueur)
+	 * @see Plus4#action(Manche, Joueur)
 	 */
 	public Joueur getJoueurSuivant() {
 		return joueurs.get((joueurs.size() + joueurCourrant + sens) % joueurs.size());
@@ -306,6 +315,11 @@ public class Manche {
 	/**
 	 * 
 	 * Fait avancer le {@link #joueurCourrant} d'un {@link Joueur}
+	 * 
+	 * @see #lancerManche()
+	 * @see Plus4#action(Manche, Joueur)
+	 * @see Plus2#action(Manche, Joueur)
+	 * @see SensInterdit#action(Manche, Joueur)
 	 * 
 	 */
 	public void AvancerJoueur() {

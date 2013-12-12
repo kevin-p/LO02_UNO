@@ -41,6 +41,9 @@ public class Talon extends ArrayList<Carte> {
 	 * Renvoi une référence sur le singleton de {@link Talon}
 	 * 
 	 * @return {@link #SingleTalon} {@link Talon}
+	 * @see Joueur#isLegitimePlus4()
+	 * @see Joueur#jouer()
+	 * @see Plus4#action(Manche, Joueur)
 	 */
 	public synchronized static Talon getInstanceTalon() {
 		
@@ -55,6 +58,7 @@ public class Talon extends ArrayList<Carte> {
 	 * permet de reconstuire un nouvel objet {@link Talon}
 	 * 
 	 * @return {@link #SingleTalon} {@link Talon}
+	 * @see Manche#reset()
 	 */
 	public synchronized static Talon reset() {
 		return SingleTalon = new Talon();
@@ -65,6 +69,9 @@ public class Talon extends ArrayList<Carte> {
 	 * renvoi la dernière {@link Carte} du {@link Talon}
 	 * 
 	 * @return lastCarte {@link Carte}
+	 * @see Joueur#isLegitimePlus4()
+	 * @see Joueur#jouer()
+	 * @see Manche#poserCarte(Carte, Joueur)
 	 */
 	public Carte getLast() {
 		return this.get(size()-1);
