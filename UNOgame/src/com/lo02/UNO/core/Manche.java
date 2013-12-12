@@ -7,6 +7,7 @@ import javax.security.auth.callback.LanguageCallback;
 
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.ChangerSens;
+import com.lo02.UNO.core.cartes.Label;
 import com.lo02.UNO.core.cartes.Plus2;
 import com.lo02.UNO.core.cartes.Plus4;
 import com.lo02.UNO.core.cartes.SensInterdit;
@@ -143,9 +144,16 @@ public class Manche {
 	 */
 	public void lancerManche() {
 		joueurCourrant = designerPremierJoueur(joueurs.size());
-		
+		System.out.println(joueurs.get(joueurCourrant).getNom());
 		boolean mancheFinie = false;
 		
+		do{
+			talon.add(pioche.remove(0));
+			
+			
+		}while(talon.getLast().getLabel()== Label.PLUS4);
+		
+		talon.getLast().action(this, joueurs.get(joueurCourrant));
 		do {
 			joueurs.get(joueurCourrant).jouer();
 			AvancerJoueur();

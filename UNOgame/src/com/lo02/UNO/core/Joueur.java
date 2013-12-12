@@ -131,6 +131,7 @@ public class Joueur {
 		Pioche pioche = Pioche.getInstancePioche();
 //		System.out.println("joueur pioche");
 		mainJoueur.addAll(pioche.piocher(nbCarte));
+		Collections.sort(mainJoueur, null);
 	}
 	
 	/**
