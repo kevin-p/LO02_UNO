@@ -10,7 +10,7 @@ import com.lo02.UNO.core.cartes.Carte;
  * 
  * Stocke aussi des méthode lié à l'organisation de la main d'un joueur
  * 
- * @author Kevin
+ * @author Kevin personnic
  *
  */
 public class MainJoueur extends ArrayList<Carte> {
