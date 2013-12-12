@@ -145,10 +145,6 @@ public class Manche {
 		joueurCourrant = designerPremierJoueur(joueurs.size());
 		
 		boolean mancheFinie = false;
-		System.out.println(pioche.size());
-		Carte c =pioche.remove(1);
-		c.afficher();
-		System.out.println(pioche.size());
 		
 		do {
 			joueurs.get(joueurCourrant).jouer();
@@ -163,7 +159,6 @@ public class Manche {
 		
 		for (Joueur j : joueurs) {
 			j.compterPoint();
-			System.out.println(j.getPoint());
 		}
 	}
 	

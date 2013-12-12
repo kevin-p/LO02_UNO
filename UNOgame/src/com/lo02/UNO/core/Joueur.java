@@ -230,7 +230,7 @@ public class Joueur {
 		boolean legitime=true;
 		Talon talon = Talon.getInstanceTalon();
 		for(Carte carte : mainJoueur) {
-			if(carte.getLabel()!= Label.PLUS4 && carte.isPosableSur(talon.get(talon.size()-2))){ // compare toutes les cartes sauf les +4
+			if(carte.getLabel()!= Label.PLUS4 && carte.isPosableSur(talon.getLast())){ // compare toutes les cartes sauf les +4
 				legitime=false;
 			}
 		}

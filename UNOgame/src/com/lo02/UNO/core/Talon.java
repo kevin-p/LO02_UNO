@@ -36,9 +36,6 @@ public class Talon extends ArrayList<Carte> {
 //		System.out.println(this.size());
 	}
 	
-	private Talon(Carte c){
-		this.add(c);
-	}
 	/**
 	 * 
 	 * Renvoi une référence sur le singleton de {@link Talon}

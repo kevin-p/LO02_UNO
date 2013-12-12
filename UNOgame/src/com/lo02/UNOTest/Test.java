@@ -99,7 +99,7 @@ public class Test {
 //		TestPioche();
 //		TestDistribution();
 //		TestSpecialCarte();
-		TestManche();
+//		TestManche();
 //		TestDemarage();
 		
 	}
