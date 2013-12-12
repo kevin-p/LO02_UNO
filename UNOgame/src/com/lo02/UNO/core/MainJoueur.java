@@ -23,6 +23,8 @@ public class MainJoueur extends ArrayList<Carte> {
 	/**
 	 * 
 	 * Constructeur par defaut
+	 * @see Joueur#Joueur()
+	 * @see Joueur#detruireMain()
 	 * 
 	 */
 	public MainJoueur () {}
