@@ -2,11 +2,13 @@ package com.lo02.UNO.core;
 
 import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.security.auth.callback.LanguageCallback;
 
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.ChangerSens;
+import com.lo02.UNO.core.cartes.Label;
 import com.lo02.UNO.core.cartes.Plus2;
 import com.lo02.UNO.core.cartes.Plus4;
 import com.lo02.UNO.core.cartes.SensInterdit;
@@ -143,9 +145,16 @@ public class Manche {
 	 */
 	public void lancerManche() {
 		joueurCourrant = designerPremierJoueur(joueurs.size());
-		
+		System.out.println(joueurs.get(joueurCourrant).getNom());
 		boolean mancheFinie = false;
 		
+		do{
+			talon.add(pioche.remove(0));
+			
+			
+		}while(talon.getLast().getLabel()== Label.PLUS4);
+		
+		talon.getLast().action(this, joueurs.get(joueurCourrant));
 		do {
 			joueurs.get(joueurCourrant).jouer();
 			AvancerJoueur();
@@ -201,8 +210,15 @@ public class Manche {
 	 */
 	public void retournerTalon() {
 		//retourner le talon dès qu'il y a 6 cartes ou moins.
-		//Eparggner la dernière carte du talon qu'il faut remettre au début. redimensionner
+		//Epargner la dernière carte du talon qu'il faut remettre au début. redimensionner
 		//reset les cartes
+		Carte c = talon.remove(0);
+		Collections.shuffle(talon);
+		pioche.addAll(talon);
+		talon.clear();
+		talon.add(c);
+		System.out.println("Le talon a été retourné");
+		
 	}
 	
 	/**

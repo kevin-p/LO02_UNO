@@ -10,7 +10,7 @@ import com.lo02.UNO.core.Manche;
  * @author Kevin Personnic
  *
  */
-public class Carte {//ajouter méthode reset() à implémenter dans le plus4 et le joker
+public class Carte  implements  Comparable<Carte>{//ajouter méthode reset() à implémenter dans le plus4 et le joker
 	
 	/**
 	 * 
@@ -164,5 +164,22 @@ public class Carte {//ajouter méthode reset() à implémenter dans le plus4 et le 
 		this.label = label;
 	}
 	
+	@Override
+	public int compareTo(Carte c) {
+		if(this.couleur.equals(c.couleur)){
+			if(this.label.ordinal()>c.label.ordinal())
+				return 1;
+			else return -1;
+		}
+			else if(this.couleur.ordinal()>c.couleur.ordinal())
+				return 1;
+			else return -1;
+				
+		}
 	
-}
+	public void reset(){}
+		
+	}
+	
+	
+
