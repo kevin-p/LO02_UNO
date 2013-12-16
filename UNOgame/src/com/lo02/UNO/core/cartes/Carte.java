@@ -177,6 +177,8 @@ public class Carte  implements  Comparable<Carte>{//ajouter méthode reset() à im
 			else return -1;
 				
 		}
+	
+	public void reset(){}
 		
 	}
 	

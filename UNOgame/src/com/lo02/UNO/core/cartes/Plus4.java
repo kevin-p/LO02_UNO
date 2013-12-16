@@ -36,4 +36,8 @@ public class Plus4 extends Carte{
 			manche.AvancerJoueur();
 		}
 	}
+	
+	public void reset(){
+		this.setCouleur(Couleur.NOIR);
+	}
 }

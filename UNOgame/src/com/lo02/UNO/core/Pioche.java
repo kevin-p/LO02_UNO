@@ -103,8 +103,20 @@ public class Pioche extends ArrayList<Carte> {
 			cartes.add(this.get(this.size()-1));
 			this.remove(this.size()-1);
 		}
+		if (this.size()<7){
+			Manche manche = Manche.getInstanceManche();
+			manche.retournerTalon();
+		}
 		
 		return cartes;
+	}
+	
+	public void resetCarteSpecial(){
+		int i;
+		for (i=0;i<this.size();i++)
+		{
+			this.get(i).reset();
+		}
 	}
 }
 
