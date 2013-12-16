@@ -1,7 +1,5 @@
 package com.lo02.UNO.core.cartes;
 
-import java.io.ObjectInputStream.GetField;
-
 import com.lo02.UNO.core.Joueur;
 import com.lo02.UNO.core.Manche;
 

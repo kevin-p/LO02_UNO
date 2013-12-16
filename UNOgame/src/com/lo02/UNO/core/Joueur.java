@@ -37,7 +37,7 @@ public class Joueur {
 	/**
 	 * Représsente la main du {@link Joueur} sous le forme d'un objet {@link MainJoueur} qui sotcke les cartes.
 	 * 
-	 * @see #getNbCartes()
+	 * @see #getNbCarte()
 	 * @see #detruireMain()
 	 */
 	private MainJoueur mainJoueur = new MainJoueur();
@@ -59,7 +59,7 @@ public class Joueur {
 	/**
 	 * constructeur par recopie de {@link Joueur}
 	 * 
-	 * @param {@link Joueur}
+	 * @param joueur {@link Joueur}
 	 */
 	public Joueur (Joueur joueur) {
 		this.nom = joueur.nom;
@@ -275,7 +275,7 @@ public class Joueur {
 	 * 
 	 * Change le nom du {@link Joueur} par le nom passé en paramètre
 	 * 
-	 * @param {@link #nom} {@link String} le nouveau {@link #nom} du {@link Joueur}
+	 * @param nom {@link String} le nouveau {@link #nom} du {@link Joueur}
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
