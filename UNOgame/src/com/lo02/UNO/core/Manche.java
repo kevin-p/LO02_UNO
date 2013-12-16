@@ -153,8 +153,15 @@ public class Manche {
 			
 			
 		}while(talon.getLast().getLabel()== Label.PLUS4);
+		if(talon.getLast().getLabel()==Label.PLUS2){
+			ReculerJoueur();
+			talon.getLast().action(this, joueurs.get(joueurCourrant));
+			AvancerJoueur();
+		}
+		else				
+			talon.getLast().action(this, joueurs.get(joueurCourrant));
 		
-		talon.getLast().action(this, joueurs.get(joueurCourrant));
+		
 		do {
 			joueurs.get(joueurCourrant).jouer();
 			AvancerJoueur();
@@ -340,5 +347,9 @@ public class Manche {
 	 */
 	public void AvancerJoueur() {
 		joueurCourrant = (joueurs.size() + joueurCourrant + sens) % joueurs.size();
+	}
+	
+	public void ReculerJoueur() {
+		joueurCourrant = (joueurs.size() + joueurCourrant + sens*-(1)) % joueurs.size();
 	}
 }
