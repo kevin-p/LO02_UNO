@@ -41,7 +41,7 @@ public class Joueur {
 	 * @see #detruireMain()
 	 */
 	private MainJoueur mainJoueur = new MainJoueur();
-	
+
 	/**
 	 * Constructeur par default de {@link Joueur}
 	 */
@@ -301,5 +301,14 @@ public class Joueur {
 	public void setPoint(int point) {
 		this.point = point;
 	}
-
+	
+	/**
+	 * 
+	 * Renvoi la main du joueur
+	 * 
+	 * @return mainJoueur {@link MainJoueur}
+	 */
+	public MainJoueur getMainJoueur() {
+		return mainJoueur;
+	}
 }
