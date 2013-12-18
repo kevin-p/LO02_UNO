@@ -88,14 +88,16 @@ public class Test {
 		int nombreJoueur = vue.nombreJoueur();
 		
 		for (int i=0;i<nombreJoueur;i++){
-			joueurs.add(new Joueur(vue.nomerJoueur(i)));
+			joueurs.add(new Joueur(vue.nommerJoueur(i)));
 		}
 	}
 	
 	public static void TestBot() {
 		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
-		joueurs.add(new Joueur("Ano1"));
+		//joueurs.add(new Joueur("Ano1"));
 		joueurs.add(new JoueurVirtuel());
+		joueurs.add(new JoueurVirtuel());
+
 		
 //		System.out.println("creation manche");
 		Manche manche = Manche.getInstanceManche();
@@ -105,6 +107,42 @@ public class Test {
 //		System.out.println("fin affectation joueurs");
 		
 		manche.lancerManche();
+	}
+	
+	public static void testFinirJeu(){
+		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+		//joueurs.add(new Joueur("Ano1"));
+		joueurs.add(new JoueurVirtuel());
+		joueurs.add(new JoueurVirtuel());
+		joueurs.add(new JoueurVirtuel());
+		joueurs.add(new JoueurVirtuel());
+		joueurs.add(new JoueurVirtuel());
+		boolean finPartie = false;
+		System.out.println("creation manche");
+		Manche manche = Manche.getInstanceManche();
+//		System.out.println("fin creation manche");
+		manche.setJoueurs(joueurs);
+		manche.distribuerCarte();
+//		System.out.println("fin affectation joueurs");
+		int nbManche=0;
+		do{
+			nbManche++;
+			manche.distribuerCarte();
+			manche.lancerManche();
+			manche.reset();
+			for (Joueur j : joueurs) {
+				
+				if(j.getPoint()>500){
+					System.out.println("Fin : Le joueur "+j.getNom()+" a obtenu "+j.getPoint());
+					finPartie=true;
+				}
+			}
+		
+			
+		}while(!finPartie);
+		System.out.println("NBMANCHE :"+nbManche);
+
+		
 	}
 	
 
@@ -117,7 +155,8 @@ public class Test {
 //		TestSpecialCarte();
 //		TestManche();
 //		TestDemarage();
-		TestBot();	
+//		TestBot();	
+		testFinirJeu();
 	}
 
 }

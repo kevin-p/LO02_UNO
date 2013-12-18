@@ -126,6 +126,7 @@ public class Manche {
 	 * 
 	 */
 	public void reset() {
+		System.out.println("Fin d'une manche");
 		
 		for (Joueur j : joueurs) {
 			j.detruireMain();
@@ -134,6 +135,8 @@ public class Manche {
 		Pioche.reset();
 		Talon.reset();
 		distribuerCarte();
+		creerTalon();
+		creerPioche();
 	}
 	
 	/**
@@ -150,6 +153,8 @@ public class Manche {
 		
 		do{
 			talon.add(pioche.remove(0));
+			System.out.println("Taille du talon en début de jeu "+talon.size());
+			talon.getLast().afficher();System.out.println(" Ajouter au talon");
 			
 			
 		}while(talon.getLast().getLabel()== Label.PLUS4);
@@ -173,16 +178,29 @@ public class Manche {
 			
 			//remplacer par exception
 			for (Joueur j : joueurs) {
-				if(j.getNbCarte() == 0)
+				if(j.getNbCarte() == 0){
 					mancheFinie = true;
+					CompterPoint(j);
+				}
+					
 			}
 		}while(!mancheFinie);
+		System.out.println("Fin de la manche");
 		
-		for (Joueur j : joueurs) {
-			j.compterPoint();
-		}
 	}
-	
+	/**
+	 * Compte les points de chaque {@link Joueur} en fin de manche
+	 * @see Joueur#compterPoint()
+	 */
+	public void CompterPoint(Joueur joueurGagnant) {
+		// TODO Auto-generated method stub
+		for (Joueur j : joueurs) {
+			j.CompterPoint(joueurGagnant);
+			System.out.println(j.getNom()+" a obtenu "+j.getPoint()+" points");
+		}
+		
+	}
+
 	/**
 	 * 
 	 * Utilisé par les {@link Joueur} pour poser une {@link Carte} sur le {@link #talon}.

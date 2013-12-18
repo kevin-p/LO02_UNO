@@ -11,17 +11,17 @@ public class BotClassic extends Bot{
 		
 		for(Carte c : joueur.getMainJoueur()) {
 			if (c.isPosableSur(carteVisible));
-				return true;
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	public int choisirIndexCarte(Joueur joueur) {
 		
 		Carte carteVisible = Talon.getInstanceTalon().getLast();
-		
+		joueur.AfficherMain();
 		for(Carte c : joueur.getMainJoueur()) {
-			if (c.isPosableSur(carteVisible));
+			if (c.isPosableSur(carteVisible))
 				return joueur.getMainJoueur().indexOf(c);
 		}
 		return joueur.getMainJoueur().size();

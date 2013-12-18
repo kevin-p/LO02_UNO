@@ -231,7 +231,7 @@ public class Joueur {
 		boolean legitime=true;
 		Talon talon = Talon.getInstanceTalon();
 		for(Carte carte : mainJoueur) {
-			if(carte.getLabel()!= Label.PLUS4 && carte.isPosableSur(talon.getLast())){ // compare toutes les cartes sauf les +4
+			if(carte.getLabel()!= Label.PLUS4 && carte.isPosableSur(talon.get(talon.size()-2))){ // compare toutes les cartes sauf les +4
 				legitime=false;
 			}
 		}
@@ -243,13 +243,29 @@ public class Joueur {
 	 * 
 	 * Compte les points de la main d'un joueur et les ajoute aux points du joueur pour la partie courante
 	 * 
-	 * @see Manche#lancerManche()
+	 * @see Manche#CompterPoint(Joueur)
 	 */
 	public void compterPoint(){
-		
+		System.out.println("Compte point 1");
 		for(Carte carte : mainJoueur) {
 			point+=carte.getLabel().valeur();
 		}
+	}
+	
+	/**
+	 * Compte les points de la main d'un joueur et les ajoute aux points du joueur gagnant de la manche
+	 * 
+	 * @see Manche#CompterPoint(Joueur)
+	 * @param jouerGagnant
+	 * 
+	 */
+	public void CompterPoint(Joueur jouerGagnant){
+		int pointManche=0;
+		for(Carte carte : mainJoueur) {
+			pointManche+=carte.getLabel().valeur();
+		}
+		jouerGagnant.setPoint(pointManche+jouerGagnant.getPoint());
+	
 	}
 	
 	/**

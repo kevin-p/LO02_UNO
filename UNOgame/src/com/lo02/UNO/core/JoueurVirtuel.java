@@ -28,6 +28,7 @@ public class JoueurVirtuel extends Joueur{
 		if(bot.isPiocher(this)) {
 			piocher(1);
 			aPioche = true;
+			System.out.println(this.getNom()+" a pioché");
 		}
 		
 		int IndexCarte = bot.choisirIndexCarte(this);

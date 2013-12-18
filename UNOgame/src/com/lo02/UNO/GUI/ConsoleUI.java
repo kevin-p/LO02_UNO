@@ -17,7 +17,7 @@ public class ConsoleUI {
 		return nbJoueur;
 	}
 	
-	public String nomerJoueur(int i){
+	public String nommerJoueur(int i){
 		System.out.println("Quel est le nom du joueur "+i+" ?");
 		return sc.next();
 	}
