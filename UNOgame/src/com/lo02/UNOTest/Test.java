@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.lo02.UNO.GUI.ConsoleUI;
 import com.lo02.UNO.core.Joueur;
+import com.lo02.UNO.core.JoueurVirtuel;
 import com.lo02.UNO.core.Manche;
 import com.lo02.UNO.core.Pioche;
 import com.lo02.UNO.core.Talon;
@@ -91,6 +92,21 @@ public class Test {
 		}
 	}
 	
+	public static void TestBot() {
+		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
+		joueurs.add(new Joueur("Ano1"));
+		joueurs.add(new JoueurVirtuel());
+		
+//		System.out.println("creation manche");
+		Manche manche = Manche.getInstanceManche();
+//		System.out.println("fin creation manche");
+		manche.setJoueurs(joueurs);
+		manche.distribuerCarte();
+//		System.out.println("fin affectation joueurs");
+		
+		manche.lancerManche();
+	}
+	
 
 	
 	public static void main(String[] args) {
@@ -99,9 +115,9 @@ public class Test {
 //		TestPioche();
 //		TestDistribution();
 //		TestSpecialCarte();
-		TestManche();
+//		TestManche();
 //		TestDemarage();
-		
+		TestBot();	
 	}
 
 }

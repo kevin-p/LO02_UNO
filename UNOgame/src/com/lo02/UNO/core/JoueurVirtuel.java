@@ -33,7 +33,9 @@ public class JoueurVirtuel extends Joueur{
 		int IndexCarte = bot.choisirIndexCarte(this);
 		
 		if(IndexCarte < getMainJoueur().size()) {
-			poser(IndexCarte);
+			System.out.print(getNom() + " à joué : ");
+			getMainJoueur().get(IndexCarte).afficher(); System.out.println();
+			poser(IndexCarte);			
 		}
 		else if (!aPioche) {
 			piocher(1);

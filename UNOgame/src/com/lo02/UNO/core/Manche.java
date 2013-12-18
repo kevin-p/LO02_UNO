@@ -144,8 +144,8 @@ public class Manche {
 	 * 
 	 */
 	public void lancerManche() {
+		
 		joueurCourrant = designerPremierJoueur(joueurs.size());
-		System.out.println(joueurs.get(joueurCourrant).getNom());
 		boolean mancheFinie = false;
 		
 		do{
@@ -153,6 +153,11 @@ public class Manche {
 			
 			
 		}while(talon.getLast().getLabel()== Label.PLUS4);
+		
+		System.out.println(	joueurs.get(joueurCourrant).getNom() + ", " +
+							joueurs.get(joueurCourrant).getNbCarte() + " cartes");
+		talon.getLast().afficher(); System.out.println(); System.out.println();
+		
 		if(talon.getLast().getLabel()==Label.PLUS2){
 			ReculerJoueur();
 			talon.getLast().action(this, joueurs.get(joueurCourrant));
