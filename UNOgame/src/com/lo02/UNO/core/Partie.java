@@ -37,16 +37,23 @@ public class Partie {
 			manche.lancerManche();
 			manche.reset();
 			for (Joueur j : joueurs) {
-				
 				if(j.getPoint()>1000){
-					System.out.println("Fin : Le joueur "+j.getNom()+" a obtenu "+j.getPoint());
-					finPartie=true;
+					finPartie = true;
+					System.out.println("La partie est finie, les scores :");
+					for (Joueur joueur : joueurs) {
+						if(joueur.getPoint()>1000){
+							System.out.println("Le joueur "+joueur.getNom()+" a gagné avec "+joueur.getPoint());
+						}
+						else {
+							System.out.println("Le joueur "+joueur.getNom()+" a perdu avec "+joueur.getPoint());
+						}
+					}
 				}
 			}
 		
 			
 		}while(!finPartie);
-		System.out.println("NBMANCHE :"+nbManche);
+		System.out.println("Nombre de manches pour finir a partie :"+nbManche);
 	}
 	
 	public ArrayList<Joueur> getJoueurs() {

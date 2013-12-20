@@ -1,5 +1,6 @@
 package com.lo02.UNO.core;
 
+import com.lo02.UNO.GUI.ConsoleUI;
 import com.lo02.UNO.core.cartes.Couleur;
 
 public class JoueurVirtuel extends Joueur{
@@ -8,7 +9,7 @@ public class JoueurVirtuel extends Joueur{
 	private Bot bot;
 	
 	public JoueurVirtuel() {
-		super("Bot" + Integer.toString(compteur++));
+		super("Bot" + Integer.toString(++compteur));
 		this.bot = new BotClassic();
 	}
 	
@@ -31,6 +32,7 @@ public class JoueurVirtuel extends Joueur{
 			System.out.println(this.getNom()+" a pioché");
 		}
 		
+		ConsoleUI.afficherTalon();
 		int IndexCarte = bot.choisirIndexCarte(this);
 		
 		if(IndexCarte < getMainJoueur().size()) {
@@ -40,6 +42,7 @@ public class JoueurVirtuel extends Joueur{
 		}
 		else if (!aPioche) {
 			piocher(1);
+			System.out.println(this.getNom()+" a pioché");
 		}
 		
 		if(bot.annncerUNO(this)) {

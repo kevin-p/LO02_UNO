@@ -153,15 +153,15 @@ public class Manche {
 		
 		do{
 			talon.add(pioche.remove(0));
-			System.out.println("Taille du talon en début de jeu "+talon.size());
-			talon.getLast().afficher();System.out.println(" Ajouter au talon");
+//			System.out.println("Taille du talon en début de jeu "+talon.size());
+//			talon.getLast().afficher();System.out.println(" Ajouter au talon");
 			
 			
 		}while(talon.getLast().getLabel()== Label.PLUS4);
 		
-		System.out.println(	joueurs.get(joueurCourrant).getNom() + ", " +
-							joueurs.get(joueurCourrant).getNbCarte() + " cartes");
-		talon.getLast().afficher(); System.out.println(); System.out.println();
+//		System.out.println(	joueurs.get(joueurCourrant).getNom() + ", " +
+//							joueurs.get(joueurCourrant).getNbCarte() + " cartes");
+//		talon.getLast().afficher(); System.out.println(); System.out.println();
 		
 		if(talon.getLast().getLabel()==Label.PLUS2){
 			ReculerJoueur();
@@ -185,7 +185,7 @@ public class Manche {
 					
 			}
 		}while(!mancheFinie);
-		System.out.println("Fin de la manche");
+//		System.out.println("Fin de la manche");
 		
 	}
 	/**

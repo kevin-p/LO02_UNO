@@ -11,7 +11,7 @@ public class ConsoleUI {
 	
 	public static int nombreJoueur(String typeJoueur){
 		
-		int nbJoueur = 0;
+		int nbJoueur = -1;
 				
 		do{
 			System.out.println("Combien y a t-il de " + typeJoueur + " dans la partie ?");
@@ -75,7 +75,9 @@ public class ConsoleUI {
 	
 	public static void afficherTalon () {
 		Talon talon = Talon.getInstanceTalon();
-		talon.getLast().afficher();System.out.println();
+		System.out.println("Talon : ");
+		talon.getLast().afficher();
+		System.out.println();
 	}
 	
 	public static boolean demanderContestPlus4(Joueur joueur) {
@@ -111,6 +113,8 @@ public class ConsoleUI {
 		System.out.println();
 		System.out.println(	"Ce jeux de uno permet pour le moment de jouer une partie classique contre des humain et"
 						  + "/ou des bots");
+		System.out.println( "Il peut y avoir 0 ou plus de joueurs humain et 0 ou plus de bots. Les bots sont nommé "
+						  + "automatiquement");
 		System.out.println();
 		System.out.println("Bon jeux !");
 		System.out.println();
