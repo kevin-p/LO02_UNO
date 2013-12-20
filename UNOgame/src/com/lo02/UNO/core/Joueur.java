@@ -31,7 +31,6 @@ public class Joueur {
 	 * 
 	 * @see #getPoint()
 	 * @see #setPoint(int point)
-	 * @see #compterPoint()
 	 */
 	private int point = 0;
 	

@@ -147,7 +147,6 @@ public class Carte  implements  Comparable<Carte>{//ajouter méthode reset() à im
 	 * 
 	 * @return {@link #label} {@link Label}
 	 * @see Joueur#isLegitimePlus4()
-	 * @see Joueur#compterPoint()
 	 */
 	public Label getLabel() {
 		return label;

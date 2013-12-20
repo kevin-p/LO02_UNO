@@ -190,7 +190,6 @@ public class Manche {
 	}
 	/**
 	 * Compte les points de chaque {@link Joueur} en fin de manche
-	 * @see Joueur#compterPoint()
 	 */
 	public void CompterPoint(Joueur joueurGagnant) {
 		for (Joueur j : joueurs) {
