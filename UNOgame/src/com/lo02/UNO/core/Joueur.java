@@ -1,5 +1,6 @@
 package com.lo02.UNO.core;
 
+import com.lo02.UNO.GUI.ConsoleUI;
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
 import com.lo02.UNO.core.cartes.Joker;
@@ -86,31 +87,17 @@ public class Joueur {
 	 * @see Manche#lancerManche()
 	 */
 	public void jouer() {
-		//a modifier au moment de l'écriture de l'interface graphique
 		int numCarte = 0;
-		Scanner sc = new Scanner(System.in);
 		
-		Talon talon = Talon.getInstanceTalon();
-		talon.getLast().afficher();System.out.println();
+		ConsoleUI.afficherTalon();	
+		numCarte = ConsoleUI.selectionnerCarte(this);
 		
-		AfficherMain();
-		
-		System.out.println(this.nom + " choisissez la carte à poser (nombre de 1 � " + mainJoueur.size() + ") : ");
-		numCarte = sc.nextInt();
-		System.out.println(numCarte + ":" + mainJoueur.size());
-		if(numCarte >= 1 && numCarte <= mainJoueur.size()) {
-//			System.out.println("juste avant poser carte");
+		if(numCarte >= 1 && numCarte <= mainJoueur.size())
 			poser(numCarte - 1);
-//			System.out.println("juste apr�s poser cate");
-		}
 		else {
 			piocher(1);
 			
-			AfficherMain();
-			
-			System.out.println(this.nom + " choisissez la carte à poser (nombre de 1 à " + mainJoueur.size() +
-								") ou 0 pour passer : ");
-			numCarte = sc.nextInt();
+			numCarte = ConsoleUI.selectionnerCarte(this);
 			
 			if(numCarte >= 1 && numCarte <= mainJoueur.size())
 				poser(numCarte - 1);
@@ -127,9 +114,7 @@ public class Joueur {
 	 * @see Manche#poserCarte(Carte, Joueur)
 	 */
 	public void piocher(int nbCarte) {
-//		System.out.println("recup instance");
 		Pioche pioche = Pioche.getInstancePioche();
-//		System.out.println("joueur pioche");
 		mainJoueur.addAll(pioche.piocher(nbCarte));
 		Collections.sort(mainJoueur, null);
 	}
@@ -185,21 +170,7 @@ public class Joueur {
 	 * @see Joker#action(Manche, Joueur)
 	 */
 	public Couleur choisirCouleur() {
-		//à changer pour fontionner de pair avec l'interface graphique
-		Scanner sc = new Scanner(System.in);
-		for (;;) {
-			System.out.println(this.nom + " choisissez une couleur (ROUGE/R/r, BLEU/B/b, VERT/V/v, JAUNE/J/j");
-			String choix = sc.nextLine();
-			System.out.println(choix);
-			if(choix.equals("ROUGE")  || choix.equals("R") || choix.equals("r"))
-				return Couleur.ROUGE;
-			if(choix.equals("BLEU") || choix.equals("B") || choix.equals("b"))
-				return Couleur.BLEU;
-			if(choix.equals("VERT") || choix.equals("V") || choix.equals("v"))
-				return Couleur.VERT;
-			if(choix.equals("JAUNE") || choix.equals("J") || choix.equals("j"))
-				return Couleur.JAUNE;
-		}
+		return ConsoleUI.selectionnerCouleur(this);
 	}
 	
 	/**
@@ -210,15 +181,7 @@ public class Joueur {
 	 * @see Plus4#action(Manche, Joueur)
 	 */
 	public boolean isContestPlus4() {
-		Scanner sc = new Scanner(System.in);
-		
-		System.out.println(this.nom + " contestez vous un Plus4 ? (OUI/O/o : ");
-		String choix = sc.nextLine();
-		System.out.println(choix);
-		if(choix.equals("OUI") ||choix.equals("O") ||choix.equals("o"))
-			return true;
-		else
-			return false;
+		return ConsoleUI.demanderContestPlus4(this);
 	}
 	
 	/**
@@ -244,12 +207,15 @@ public class Joueur {
 	 * Compte les points de la main d'un joueur et les ajoute aux points du joueur pour la partie courante
 	 * 
 	 * @see Manche#CompterPoint(Joueur)
-	 */
+	 *//*
 	public void compterPoint(){
-		System.out.println("Compte point 1");
 		for(Carte carte : mainJoueur) {
 			point+=carte.getLabel().valeur();
 		}
+	}*/
+	
+	public void addPoint(int points){
+		this.point += points;
 	}
 	
 	/**
@@ -258,7 +224,7 @@ public class Joueur {
 	 * @see Manche#CompterPoint(Joueur)
 	 * @param jouerGagnant
 	 * 
-	 */
+	 *//*
 	public void CompterPoint(Joueur jouerGagnant){
 		int pointManche=0;
 		for(Carte carte : mainJoueur) {
@@ -266,7 +232,7 @@ public class Joueur {
 		}
 		jouerGagnant.setPoint(pointManche+jouerGagnant.getPoint());
 	
-	}
+	}*/
 	
 	/**
 	 * 

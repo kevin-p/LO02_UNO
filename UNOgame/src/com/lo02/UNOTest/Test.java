@@ -84,11 +84,10 @@ public class Test {
 	
 	public static void TestDemarage(){
 		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
-		ConsoleUI vue = new ConsoleUI();
-		int nombreJoueur = vue.nombreJoueur();
+		int nombreJoueur = ConsoleUI.choisirNbHumain();
 		
 		for (int i=0;i<nombreJoueur;i++){
-			joueurs.add(new Joueur(vue.nommerJoueur(i)));
+			joueurs.add(new Joueur(ConsoleUI.nommerJoueur(i)));
 		}
 	}
 	
@@ -146,7 +145,7 @@ public class Test {
 	}
 	
 
-	
+	/*
 	public static void main(String[] args) {
 //		TestLabel();
 //		TestCouleur();
@@ -154,9 +153,9 @@ public class Test {
 //		TestDistribution();
 //		TestSpecialCarte();
 //		TestManche();
-		TestDemarage();
+//		TestDemarage();
 //		TestBot();	
 //		testFinirJeu();
 	}
-
+*/
 }

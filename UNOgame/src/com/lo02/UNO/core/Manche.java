@@ -193,12 +193,9 @@ public class Manche {
 	 * @see Joueur#compterPoint()
 	 */
 	public void CompterPoint(Joueur joueurGagnant) {
-		// TODO Auto-generated method stub
 		for (Joueur j : joueurs) {
-			j.CompterPoint(joueurGagnant);
-			System.out.println(j.getNom()+" a obtenu "+j.getPoint()+" points");
-		}
-		
+			joueurGagnant.addPoint(j.getMainJoueur().getValeurTotal());
+		}		
 	}
 
 	/**
@@ -220,7 +217,7 @@ public class Manche {
 
 		if (!carte.isPosableSur(talon.getLast())) {
 			joueur.piocher(2);
-			System.out.println("carte rejetee");
+			System.out.println("carte rejetée, vous recevez une penalitée de 2 cartes");
 			return false;
 		}
 		else {
@@ -228,7 +225,7 @@ public class Manche {
 //			System.out.println("juste avant l'action");
 			carte.action(this, joueur);
 //			System.out.println("juste après l'action");
-			System.out.println("carte acceptee");
+//			System.out.println("carte acceptee");
 			return true;
 		}
 	}

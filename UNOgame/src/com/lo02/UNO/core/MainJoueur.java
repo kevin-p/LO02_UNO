@@ -29,22 +29,13 @@ public class MainJoueur extends ArrayList<Carte> {
 	 */
 	public MainJoueur () {}
 	
-	
-	/**
-	 * 
-	 * Range les {@link Carte} de la {@link MainJoueur} par ordre croissant
-	 * 
-	 */
-	public void rangerCroiss() {
+	public int getValeurTotal () {
+		int point = 0;
 		
-	}
-	
-	/**
-	 * 
-	 * Range les {@link Carte} de la {@link MainJoueur} par ordre décroissant
-	 * 
-	 */
-	public void rangerDesc() {
+		for(Carte carte : this) {
+			point+=carte.getLabel().valeur();
+		}
 		
+		return point;
 	}
 }
