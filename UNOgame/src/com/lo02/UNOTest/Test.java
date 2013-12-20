@@ -154,9 +154,9 @@ public class Test {
 //		TestDistribution();
 //		TestSpecialCarte();
 //		TestManche();
-//		TestDemarage();
+		TestDemarage();
 //		TestBot();	
-		testFinirJeu();
+//		testFinirJeu();
 	}
 
 }
