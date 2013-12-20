@@ -94,7 +94,7 @@ public class Carte  implements  Comparable<Carte>{//ajouter méthode reset() à im
 	 * 
 	 */
 	public void afficher() {
-		System.out.print(" | " + label+ ":" + couleur);
+		System.out.print("|" + label+ ":" + couleur + "| ");
 	}
 	
 	/**

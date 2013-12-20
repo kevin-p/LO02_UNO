@@ -155,6 +155,7 @@ public class Joueur {
 	 */
 	public void AfficherMain() {
 		for(Carte carte : mainJoueur) {
+			System.out.print("|" + (int)(mainJoueur.indexOf(carte) + 1));
 			carte.afficher();
 		}
 		System.out.println();
