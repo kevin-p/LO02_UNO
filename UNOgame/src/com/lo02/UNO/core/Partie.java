@@ -28,7 +28,7 @@ public class Partie {
 		
 		Manche manche = Manche.getInstanceManche();
 		manche.setJoueurs(joueurs);
-		manche.distribuerCarte();
+		//manche.distribuerCarte();
 
 		int nbManche=0;
 		do{
