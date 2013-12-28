@@ -7,10 +7,9 @@ import com.lo02.UNO.GUI.ConsoleUI;
 public class Partie {
 	private ArrayList<Joueur> joueurs;
 
-	public Partie () {
+/*	public Partie () {
 		joueurs = new ArrayList<Joueur>();
 		int nombreJoueur = ConsoleUI.choisirNbHumain();
-		
 		for (int i = 0; i < nombreJoueur; ++i){
 			joueurs.add(new Joueur(ConsoleUI.nommerJoueur(i)));
 		}
@@ -20,6 +19,26 @@ public class Partie {
 		for (int i = 0; i < nombreBot; ++i) {
 			joueurs.add(new JoueurVirtuel());
 		}
+	}
+*/
+	public Partie(){
+		
+	}
+	public void initialiserPartie(int nbHumain,int nbBot,String []nom){
+		joueurs = new ArrayList<Joueur>();
+		int nombreJoueurHumain = nbHumain;
+
+		
+		for (int i = 0; i < nombreJoueurHumain; ++i){
+			joueurs.add(new Joueur(nom[i]));
+		}
+		
+		int nombreBot =nbBot;
+		
+		for (int i = 0; i < nombreBot; ++i) {
+			joueurs.add(new JoueurVirtuel());
+		}
+		
 	}
 	
 	public void lancerPartie() {
