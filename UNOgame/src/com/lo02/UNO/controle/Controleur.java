@@ -30,8 +30,16 @@ public class Controleur {
 			nom[i]=vue.choixNom(i+1);
 		}
 		partie.initialiserPartie(nbHumain, nbBot, nom);
+		vue.InitialiserVu();
 		partie.lancerPartie();
+		//vue.afficherScore();
 	}
+	
+	public Partie getPartie(){
+		return partie;
+	}
+	
+	
 	
 	
 }

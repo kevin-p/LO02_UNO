@@ -1,11 +1,14 @@
 package com.lo02.UNO.core;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import com.lo02.UNO.GUI.ConsoleUI;
 
-public class Partie {
+public class Partie extends Observable{
 	private ArrayList<Joueur> joueurs;
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
 /*	public Partie () {
 		joueurs = new ArrayList<Joueur>();
@@ -50,9 +53,9 @@ public class Partie {
 		//manche.distribuerCarte();
 
 		int nbManche=0;
+		manche.distribuerCarte();
 		do{
 			nbManche++;
-			manche.distribuerCarte();
 			manche.lancerManche();
 			manche.reset();
 			for (Joueur j : joueurs) {
@@ -69,10 +72,12 @@ public class Partie {
 					}
 				}
 			}
+			notifyObservers();
 		
 			
 		}while(!finPartie);
 		System.out.println("Nombre de manches pour finir a partie :"+nbManche);
+		
 	}
 	
 	public ArrayList<Joueur> getJoueurs() {
@@ -82,5 +87,25 @@ public class Partie {
 	public void setJoueurs(ArrayList<Joueur> joueurs) {
 		this.joueurs = joueurs;
 	}
+	
+	public void notifyObservers() {
+
+		 for (Observer ob : observers) {
+            ob.update(this, joueurs);
+     }
+
+	}
+
+	public void addObserver(Observer observer) {
+		 observers.add(observer);
+		
+	}
+
+	public void removeObserver(Observer observer) {
+		 observers.remove(observer);
+		
+	}
+
+
 
 }

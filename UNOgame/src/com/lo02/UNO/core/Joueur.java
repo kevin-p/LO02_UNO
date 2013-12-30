@@ -16,7 +16,7 @@ import java.util.*;
  * @author Kevin personnic
  *
  */
-public class Joueur {
+public class Joueur extends Observable{
 	
 	/**
 	 * Le nom du {@link Joueur}
@@ -41,6 +41,8 @@ public class Joueur {
 	 * @see #detruireMain()
 	 */
 	private MainJoueur mainJoueur = new MainJoueur();
+	
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
 	/**
 	 * Constructeur par default de {@link Joueur}
@@ -88,7 +90,8 @@ public class Joueur {
 	public void jouer() {
 		int numCarte = 0;
 		
-		ConsoleUI.afficherTalon();	
+		ConsoleUI.afficherTalon();
+		notifyObservers();
 		numCarte = ConsoleUI.selectionnerCarte(this);
 		
 		if(numCarte >= 1 && numCarte <= mainJoueur.size())
@@ -127,8 +130,12 @@ public class Joueur {
 	 */
 	public void poser(int IndexCarte) {
 		Manche manche = Manche.getInstanceManche();
-		if(manche.poserCarte(mainJoueur.get(IndexCarte), this))
+		if(manche.poserCarte(mainJoueur.get(IndexCarte), this)){
+			notifyObservers(mainJoueur.get(IndexCarte));
 			mainJoueur.remove(IndexCarte);
+		}
+			
+		
 	}
 	
 	/***
@@ -292,5 +299,32 @@ public class Joueur {
 	 */
 	public MainJoueur getMainJoueur() {
 		return mainJoueur;
+	}
+	
+	public void notifyObservers() {
+
+		 for (Observer ob : observers) {
+           ob.update(this, this);
+		 }
+		 	 
+	}
+	
+	public void notifyObservers(Object arg) {
+
+		 for (Observer ob : observers) {
+          ob.update(this, arg);
+		 }
+		 	 
+	}
+	
+
+	public void addObserver(Observer observer) {
+		 observers.add(observer);
+		
+	}
+
+	public void removeObserver(Observer observer) {
+		 observers.remove(observer);
+		
 	}
 }
