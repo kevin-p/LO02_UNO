@@ -3,10 +3,12 @@ package com.lo02.UNO.GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Observable;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -231,7 +233,10 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				pTalon.removeAll();
 				Carte c =(Carte) arg1;
 				JButton bCarte = new JButton();
-				bCarte.setLabel(c.getLabel().name());
+				ImageIcon iconImg = new ImageIcon(new ImageIcon("img/" + c.getLabel() + "-" + c.getCouleur() + ".jpg")
+													.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
+				bCarte.setIcon(iconImg);
+				bCarte.setVisible(true);
 				switch (c.getCouleur()) {
 				case BLEU: bCarte.setBackground(Color.blue);break;
 				case ROUGE: bCarte.setBackground(Color.red);break;
@@ -258,19 +263,11 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				for (Carte c : j.getMainJoueur()){
 					num++;
 					JButton bCarte = new JButton();
+					ImageIcon iconImg = new ImageIcon(new ImageIcon("img/" + c.getLabel() + "-" + c.getCouleur() + ".jpg")
+														.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
+					bCarte.setIcon(iconImg);
 					bCarte.setActionCommand(Integer.toString(num));
 					bCarte.addActionListener(controleur);
-					bCarte.setLabel(c.getLabel().name());
-					bCarte.setForeground(Color.BLACK);
-					switch (c.getCouleur()) {
-					case BLEU: bCarte.setBackground(Color.blue);break;
-					case ROUGE: bCarte.setBackground(Color.red);break;
-					case JAUNE: bCarte.setBackground(Color.yellow);break;
-					case VERT: bCarte.setBackground(Color.green);break;
-
-					default:
-						break;
-					}
 					pMainJoueur.add(bCarte);
 				}
 			
