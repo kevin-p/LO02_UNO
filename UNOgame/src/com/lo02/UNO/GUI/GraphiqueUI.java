@@ -1,6 +1,7 @@
 package com.lo02.UNO.GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Observable;
@@ -36,6 +37,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	public GraphiqueUI(String titre,Controleur controleur){
 		super(titre);
 		this.controleur=controleur;
+		this.addWindowListener(controleur);
 		controleur.getPartie().addObserver(this);
 		
 		//pJeu= new JPanel();
@@ -49,6 +51,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		pScore = new JPanel();
 
 		pScore.setBorder(BorderFactory.createTitledBorder(" Scores"));
+		pScore.setMaximumSize(new Dimension(getWidth(), 700));
 		this.add(pScore,BorderLayout.NORTH);
 	}
 	private void creerPanelTalon()
@@ -153,7 +156,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		JTable tab = new JTable(donnees, cols);
 		 
 		JScrollPane sp = new JScrollPane(tab);
-		sp.setMaximumSize(pScore.getSize());
+		
 		pScore.removeAll();
 		pScore.add(sp);
 		pScore.validate();
@@ -172,6 +175,15 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				Carte c =(Carte) arg1;
 				JButton bCarte = new JButton();
 				bCarte.setLabel(c.getLabel().name());
+				switch (c.getCouleur()) {
+				case BLEU: bCarte.setBackground(Color.blue);break;
+				case ROUGE: bCarte.setBackground(Color.red);break;
+				case JAUNE: bCarte.setBackground(Color.yellow);break;
+				case VERT: bCarte.setBackground(Color.green);break;
+
+				default:
+					break;
+				}
 				pTalon.add(bCarte);
 				pTalon.getParent().repaint();
 				this.validate();
@@ -180,10 +192,23 @@ public class GraphiqueUI extends JFrame implements IObservable {
 			else{
 				Joueur j = (Joueur) o;
 				pMainJoueur.removeAll();
-				
+				int num=0;
 				for (Carte c : j.getMainJoueur()){
+					num++;
 					JButton bCarte = new JButton();
+					bCarte.setActionCommand(Integer.toString(num));
+					bCarte.addActionListener(controleur);
 					bCarte.setLabel(c.getLabel().name());
+					 bCarte.setForeground(Color.BLACK);
+					switch (c.getCouleur()) {
+					case BLEU: bCarte.setBackground(Color.blue);break;
+					case ROUGE: bCarte.setBackground(Color.red);break;
+					case JAUNE: bCarte.setBackground(Color.yellow);break;
+					case VERT: bCarte.setBackground(Color.green);break;
+
+					default:
+						break;
+					}
 					pMainJoueur.add(bCarte);
 				}
 			

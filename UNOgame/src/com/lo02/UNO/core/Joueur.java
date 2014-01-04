@@ -41,8 +41,18 @@ public class Joueur extends Observable{
 	 * @see #detruireMain()
 	 */
 	private MainJoueur mainJoueur = new MainJoueur();
+	/**
+	 * Liste des observateurs des joueurs
+	 * @see Observer
+	 */
 	
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
+	
+	/**
+	 * indexe de la carte selectionner par le joueur
+	 * @see #choisirIndex()
+	 */
+	private int index=-1;
 
 	/**
 	 * Constructeur par default de {@link Joueur}
@@ -88,23 +98,42 @@ public class Joueur extends Observable{
 	 * @see Manche#lancerManche()
 	 */
 	public void jouer() {
-		int numCarte = 0;
+		//int numCarte = 0;
 		
 		ConsoleUI.afficherTalon();
 		notifyObservers();
-		numCarte = ConsoleUI.selectionnerCarte(this);
-		
+		//numCarte = ConsoleUI.selectionnerCarte(this);
+		int numCarte=choisirIndexCarte();
 		if(numCarte >= 1 && numCarte <= mainJoueur.size())
 			poser(numCarte - 1);
 		else {
 			piocher(1);
-			
+			notifyObservers();
 			numCarte = ConsoleUI.selectionnerCarte(this);
 			
 			if(numCarte >= 1 && numCarte <= mainJoueur.size())
 				poser(numCarte - 1);
 		}
 	}
+	
+	synchronized public int choisirIndexCarte(){
+		
+		while(index==-1){
+            try {
+                //attente passive
+                wait();
+            } catch(InterruptedException ie) {
+                ie.printStackTrace();
+            }
+        }
+		int numCarte=index;
+		index=-1;
+        return numCarte;
+        
+	}
+	
+
+		
 	
 	/**
 	 * 
@@ -291,6 +320,14 @@ public class Joueur extends Observable{
 		this.point = point;
 	}
 	
+
+	/**
+	 * @param numCarte the numCarte to set
+	 */
+	public void setNumCarte(int numCarte) {
+		this.index = numCarte;
+	}
+
 	/**
 	 * 
 	 * Renvoi la main du joueur
