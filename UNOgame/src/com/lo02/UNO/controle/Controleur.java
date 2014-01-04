@@ -1,13 +1,15 @@
 package com.lo02.UNO.controle;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import com.lo02.UNO.GUI.IObservable;
+import com.lo02.UNO.core.Manche;
 import com.lo02.UNO.core.Partie;
 
-public class Controleur {
+public class Controleur implements WindowListener,ActionListener {
 
 	private Partie partie;
 	private IObservable vue;
@@ -38,6 +40,83 @@ public class Controleur {
 	public Partie getPartie(){
 		return partie;
 	}
+
+	@Override
+	
+
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		Manche manche = Manche.getInstanceManche();
+		synchronized (manche.getJoueurCourant()) {
+			int index = Integer.parseInt(e.getActionCommand().toString());
+			System.out.println((e.getActionCommand().toString()));
+			manche.getJoueurCourant().setNumCarte(index);
+			manche.getJoueurCourant().notify();
+			
+		}
+		
+	}
+	@Override
+	
+
+
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+
+	
+	
+
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		System.exit(0);
+	}
+
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
+
+
+	
 	
 	
 	
