@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JOptionPane;
+
 import com.lo02.UNO.GUI.IObservable;
 import com.lo02.UNO.core.Manche;
 import com.lo02.UNO.core.Partie;
@@ -26,8 +28,16 @@ public class Controleur implements WindowListener,ActionListener {
 	
 	
 	public void initialiser(){ // rajouter une exception si le nombre de joueurs est trop grand 
-		int nbHumain = vue.getNbHumain();
-		int nbBot = vue.getNbBot();
+		int nbHumain=0;
+		int nbBot=0;
+		do{
+			JOptionPane.showMessageDialog(null, "Bienvenue sur le jeu de Uno. Nombre max de joueur : 10");
+		nbHumain = vue.getNbHumain();
+		nbBot = vue.getNbBot();
+		}while((nbHumain+nbBot)<1||(nbHumain+nbBot)>10);
+			
+		
+		
 		String [] nom = new String[7] ;
 		for (int i=0;i<nbHumain;i++){
 			nom[i]=vue.choixNom(i+1);
