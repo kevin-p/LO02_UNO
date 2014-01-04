@@ -1,14 +1,20 @@
 package com.lo02.UNO.core;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.JOptionPane;
+
 import com.lo02.UNO.GUI.ConsoleUI;
+import com.lo02.UNO.controle.Controleur;
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
 import com.lo02.UNO.core.cartes.Joker;
 import com.lo02.UNO.core.cartes.Label;
 import com.lo02.UNO.core.cartes.Plus4;
 import com.lo02.UNOTest.Test;
-
-import java.util.*;
 /**
  * 
  * Représente et stocke toutes les informations concernant un {@link Joueur}
@@ -45,7 +51,6 @@ public class Joueur extends Observable{
 	 * Liste des observateurs des joueurs
 	 * @see Observer
 	 */
-	
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	
 	/**
@@ -53,6 +58,10 @@ public class Joueur extends Observable{
 	 * @see #choisirIndex()
 	 */
 	private int index=-1;
+	/**
+	 * couleur choisie par le joueur mise à jour via le {@link Controleur}
+	 */
+	private Couleur choixCouleur=null;
 
 	/**
 	 * Constructeur par default de {@link Joueur}
@@ -109,13 +118,18 @@ public class Joueur extends Observable{
 		else {
 			piocher(1);
 			notifyObservers();
-			numCarte = ConsoleUI.selectionnerCarte(this);
+			//numCarte = ConsoleUI.selectionnerCarte(this);
+			numCarte=choisirIndexCarte();
 			
 			if(numCarte >= 1 && numCarte <= mainJoueur.size())
 				poser(numCarte - 1);
 		}
 	}
 	
+	/**
+	 * Méthode en attente d'une notification du controleur pour connaitre la carte choisie par l'utilisateur 
+	 * @return @see index
+	 */
 	synchronized public int choisirIndexCarte(){
 		
 		while(index==-1){
@@ -131,9 +145,6 @@ public class Joueur extends Observable{
         return numCarte;
         
 	}
-	
-
-		
 	
 	/**
 	 * 
@@ -205,8 +216,22 @@ public class Joueur extends Observable{
 	 * @see Plus4#action(Manche, Joueur)
 	 * @see Joker#action(Manche, Joueur)
 	 */
-	public Couleur choisirCouleur() {
-		return ConsoleUI.selectionnerCouleur(this);
+	synchronized public Couleur choisirCouleur() {
+		
+		notifyObservers("Couleur");
+		while(choixCouleur==null){
+            try {
+                //attente passive
+                wait();
+            } catch(InterruptedException ie) {
+                ie.printStackTrace();
+            }
+        }
+		Couleur choix=choixCouleur;
+		choixCouleur=null;
+        return choix;
+		
+		//return ConsoleUI.selectionnerCouleur(this);
 	}
 	
 	/**
@@ -217,7 +242,13 @@ public class Joueur extends Observable{
 	 * @see Plus4#action(Manche, Joueur)
 	 */
 	public boolean isContestPlus4() {
-		return ConsoleUI.demanderContestPlus4(this);
+		 int choix = JOptionPane.showConfirmDialog(null, "Voulez vous contester le +4", "Contestation plus4", JOptionPane.YES_NO_OPTION);
+		 if(choix==JOptionPane.YES_OPTION){
+			 return true;
+		 }
+		 else
+			 return false;
+		//return ConsoleUI.demanderContestPlus4(this);
 	}
 	
 	/**
@@ -319,7 +350,12 @@ public class Joueur extends Observable{
 	public void setPoint(int point) {
 		this.point = point;
 	}
-	
+	/**
+	 * @param choixCouleur the choixCouleur to set
+	 */
+	public void setChoixCouleur(Couleur choixCouleur) {
+		this.choixCouleur = choixCouleur;
+	}
 
 	/**
 	 * @param numCarte the numCarte to set

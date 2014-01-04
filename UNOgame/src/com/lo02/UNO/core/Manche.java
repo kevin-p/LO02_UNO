@@ -153,6 +153,7 @@ public class Manche {
 		
 		do{
 			talon.add(pioche.remove(0));
+			joueurs.get(joueurCourrant).notifyObservers(talon.getLast());
 //			System.out.println("Taille du talon en début de jeu "+talon.size());
 //			talon.getLast().afficher();System.out.println(" Ajouter au talon");
 			

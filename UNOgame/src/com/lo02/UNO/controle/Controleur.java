@@ -8,6 +8,7 @@ import java.awt.event.WindowListener;
 import com.lo02.UNO.GUI.IObservable;
 import com.lo02.UNO.core.Manche;
 import com.lo02.UNO.core.Partie;
+import com.lo02.UNO.core.cartes.Couleur;
 
 public class Controleur implements WindowListener,ActionListener {
 
@@ -47,11 +48,30 @@ public class Controleur implements WindowListener,ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Manche manche = Manche.getInstanceManche();
+		System.out.println((e.getActionCommand().toString()));
 		synchronized (manche.getJoueurCourant()) {
+		if (e.getActionCommand().toString().equals("bleu")){
+			manche.getJoueurCourant().setChoixCouleur(Couleur.BLEU);
+			manche.getJoueurCourant().notify();
+		}
+		if (e.getActionCommand().toString().equals("rouge")){
+			manche.getJoueurCourant().setChoixCouleur(Couleur.ROUGE);
+			manche.getJoueurCourant().notify();
+		}
+		if (e.getActionCommand().toString().equals("jaune")){
+			manche.getJoueurCourant().setChoixCouleur(Couleur.JAUNE);
+			manche.getJoueurCourant().notify();
+		}
+		if (e.getActionCommand().toString().equals("vert")){
+			manche.getJoueurCourant().setChoixCouleur(Couleur.VERT);
+			manche.getJoueurCourant().notify();
+		}
+		else{
+		
 			int index = Integer.parseInt(e.getActionCommand().toString());
 			System.out.println((e.getActionCommand().toString()));
 			manche.getJoueurCourant().setNumCarte(index);
-			manche.getJoueurCourant().notify();
+			manche.getJoueurCourant().notify();}
 			
 		}
 		

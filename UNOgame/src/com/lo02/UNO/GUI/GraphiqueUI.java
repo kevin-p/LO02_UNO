@@ -8,6 +8,7 @@ import java.util.Observable;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,6 +33,8 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	private JButton bPasser;
 	private JPanel pTalon;
 	private JPanel pScore;
+	private JPanel pCentral;
+	private JFrame fChoixCouleur;
 	
 
 	public GraphiqueUI(String titre,Controleur controleur){
@@ -56,10 +59,17 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	}
 	private void creerPanelTalon()
 	{
+		pCentral = new JPanel();
 		pTalon = new JPanel();
-
+		bPioche = new JButton("Piocher / Passer");
+		bPioche.setActionCommand("0");
+		bPioche.setForeground(Color.BLACK);
+		bPioche.addActionListener(controleur);
+		
+		pCentral.add(bPioche,BorderLayout.EAST);
 		pTalon.setBorder(BorderFactory.createTitledBorder(" Talon"));
-		this.add(pTalon,BorderLayout.CENTER);
+		pCentral.add(pTalon,BorderLayout.CENTER);
+		this.add(pCentral,BorderLayout.CENTER);
 	}
 	
 	private void  creerPanelMainJoueur()
@@ -141,8 +151,51 @@ public class GraphiqueUI extends JFrame implements IObservable {
 			return 0;
 		}
 
+	private void creerFenetreCouleur(){
+				
+		fChoixCouleur = new JFrame();
+		JPanel pDroite = new JPanel();
+		JPanel pGauche = new JPanel();
+		
+		pDroite.setPreferredSize(new Dimension(110,110));
+		pGauche.setPreferredSize(new Dimension(110,110));
+		
+		JButton bVert = new JButton();		
+		bVert.setBackground(Color.green);
+		bVert.addActionListener(controleur);
+		bVert.setActionCommand("vert");
+		bVert.setPreferredSize(new Dimension(100,100));
+		pGauche.add(bVert,BorderLayout.SOUTH);
+		
+		JButton bBleu = new JButton();
+		bBleu.setBackground(Color.blue);
+		bBleu.addActionListener(controleur);
+		bBleu.setActionCommand("bleu");
+		bBleu.setPreferredSize(new Dimension(100,100));
+		pGauche.add(bBleu,BorderLayout.NORTH);
+		
+		JButton bJaune = new JButton();
+		bJaune.setBackground(Color.yellow);
+		bJaune.addActionListener(controleur);
+		bJaune.setActionCommand("jaune");
+		bJaune.setPreferredSize(new Dimension(100,100));
+		pDroite.add(bJaune,BorderLayout.SOUTH);
+		
+		JButton bRouge = new JButton();
+		bRouge.addActionListener(controleur);
+		bRouge.setActionCommand("rouge");
+		bRouge.setBackground(Color.red);
+		bRouge.setPreferredSize(new Dimension(100,100));
+		pDroite.add(bRouge,BorderLayout.NORTH);
+		
+		fChoixCouleur.setSize(250, 250);
+		fChoixCouleur.add(pGauche,BorderLayout.NORTH);
+		fChoixCouleur.add(pDroite,BorderLayout.SOUTH);
+	
+
+	}
 	public void afficherScore(){
-		// ArrayList<Joueur> joueurs = arg1;
+
 		int nbJoueur =controleur.getPartie().getJoueurs().size();
 		String [][] donnees=new String[nbJoueur][2];
 			
@@ -169,6 +222,10 @@ public class GraphiqueUI extends JFrame implements IObservable {
 
 	public void update(Observable o, Object arg1) {
 		// TODO Auto-generated method stub
+		this.setEnabled(true);
+		fChoixCouleur.setVisible(false);
+
+		
 		if(o instanceof Joueur){
 			if(arg1 instanceof Carte){
 				pTalon.removeAll();
@@ -189,6 +246,11 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				this.validate();
 				
 			}
+			else if(arg1.equals("Couleur")){
+				fChoixCouleur.setVisible(true);
+				this.setEnabled(false);
+				
+			}
 			else{
 				Joueur j = (Joueur) o;
 				pMainJoueur.removeAll();
@@ -199,7 +261,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 					bCarte.setActionCommand(Integer.toString(num));
 					bCarte.addActionListener(controleur);
 					bCarte.setLabel(c.getLabel().name());
-					 bCarte.setForeground(Color.BLACK);
+					bCarte.setForeground(Color.BLACK);
 					switch (c.getCouleur()) {
 					case BLEU: bCarte.setBackground(Color.blue);break;
 					case ROUGE: bCarte.setBackground(Color.red);break;
@@ -228,6 +290,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		creerPanelMainJoueur();
 		creerPanelTalon();
 		creerPanelScore();
+		creerFenetreCouleur();
 	}
 	
 }
