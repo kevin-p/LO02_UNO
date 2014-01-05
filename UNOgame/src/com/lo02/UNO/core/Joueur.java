@@ -242,7 +242,7 @@ public class Joueur extends Observable{
 	 * @see Plus4#action(Manche, Joueur)
 	 */
 	public boolean isContestPlus4() {
-		 int choix = JOptionPane.showConfirmDialog(null, "Voulez vous contester le +4", "Contestation plus4", JOptionPane.YES_NO_OPTION);
+		 int choix = JOptionPane.showConfirmDialog(null, getNom()+"  voulez vous contester le +4", "Contestation plus4", JOptionPane.YES_NO_OPTION);
 		 if(choix==JOptionPane.YES_OPTION){
 			 return true;
 		 }
