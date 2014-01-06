@@ -3,7 +3,9 @@ package com.lo02.UNO.GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.TextArea;
 import java.awt.Toolkit;
 import java.util.Observable;
 
@@ -29,14 +31,15 @@ import com.lo02.UNO.core.cartes.Carte;
 public class GraphiqueUI extends JFrame implements IObservable {
 	
 	private Controleur controleur; 
-	private JPanel pJeu;
+	private JPanel pInfoJeu;
 	private JPanel pMainJoueur;
 	private JButton bPioche;
-	private JButton bPasser;
 	private JPanel pTalon;
 	private JPanel pScore;
 	private JPanel pCentral;
+	private JPanel pInfoJoueur;
 	private JFrame fChoixCouleur;
+	private TextArea infoJeu;
 	
 
 	public GraphiqueUI(String titre,Controleur controleur){
@@ -44,26 +47,40 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		this.controleur=controleur;
 		this.addWindowListener(controleur);
 		controleur.getPartie().addObserver(this);
-		
-		//pJeu= new JPanel();
-		//pJeu.add(new OptionPanel().getPanel(),BorderLayout.NORTH);
-		//this.add(pJeu);
+
 		
 		place();
 		}
-	private void creerPanelScore()
-	{
+	private void creerPanelInfoJeu(){
+		pInfoJeu = new JPanel();
+		infoJeu = new TextArea();
+		
+		infoJeu.append("Tableau de jeu \n");
+		infoJeu.setEditable(false);
+		
+		pInfoJeu.add(infoJeu);
+		pCentral.add(pInfoJeu,BorderLayout.EAST);
+		
+	}
+	private void creerPanelScore(){
 		pScore = new JPanel();
 
 		pScore.setBorder(BorderFactory.createTitledBorder(" Scores"));
-		pScore.setMaximumSize(new Dimension(getWidth(), 700));
+		pScore.setPreferredSize(new Dimension(getWidth(), 300));
 		this.add(pScore,BorderLayout.NORTH);
 	}
-	private void creerPanelTalon()
-	{
+	
+	private void creerPanelInfoJoueur(){
+		pInfoJoueur = new JPanel();
+		pCentral.add(pInfoJoueur,BorderLayout.EAST);
+	}
+	private void creerPanelTalon(){
 		pCentral = new JPanel();
 		pTalon = new JPanel();
 		bPioche = new JButton("Piocher / Passer");
+		ImageIcon iconImg = new ImageIcon(new ImageIcon("img/DOS.jpg")
+											.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
+		bPioche.setIcon(iconImg);
 		bPioche.setActionCommand("0");
 		bPioche.setForeground(Color.BLACK);
 		bPioche.addActionListener(controleur);
@@ -74,8 +91,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		this.add(pCentral,BorderLayout.CENTER);
 	}
 	
-	private void  creerPanelMainJoueur()
-	{
+	private void  creerPanelMainJoueur(){
 		pMainJoueur=new JPanel();
 		pMainJoueur.setBorder(BorderFactory.createTitledBorder(" Votre jeu"));
 		
@@ -128,7 +144,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	public int getNbBot() {
 		try {
 			int nbBot = Integer.parseInt(JOptionPane.showInputDialog(null, "Entrez le nombre total de Bot")) ;				
-			if(nbBot > 7) {
+			if(nbBot > 10 || nbBot <0) {
 				JOptionPane.showMessageDialog(null, "Vous avez rentrer trop de Bot. Nombre max de Bot : 7");
 				throw new NumberFormatException();
 			}
@@ -142,8 +158,8 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	public int getNbHumain() {
 			try {
 				int nbHumain = Integer.parseInt(JOptionPane.showInputDialog(null, "Entrez le nombre total d'humain (en vous comptant) qui vont jouer.")) ;				
-				if(nbHumain > 7) {
-					JOptionPane.showMessageDialog(null, "Vous avez rentrer trop d'humains. Nombre max de joueur : 7");
+				if(nbHumain > 10 || nbHumain < 0) {
+					JOptionPane.showMessageDialog(null, "Vous avez rentrer trop d'humains. Nombre max de joueur : 10");
 					throw new NumberFormatException();
 				}
 				return nbHumain;
@@ -209,13 +225,38 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		
 		String[] cols = {"Nom", "Score"};
 		JTable tab = new JTable(donnees, cols);
+		tab.setEnabled(false);
 		 
 		JScrollPane sp = new JScrollPane(tab);
-		
+		sp.setPreferredSize(new Dimension(200,250));
 		pScore.removeAll();
 		pScore.add(sp);
 		pScore.validate();
 		pScore.repaint();
+		this.validate();
+	}
+	
+	public void afficherNombreCarte(){
+
+		int nbJoueur =controleur.getPartie().getJoueurs().size();
+		String [][] donnees=new String[nbJoueur][2];
+			
+		for (int i=0;i<nbJoueur;i++){
+			donnees[i][0]=controleur.getPartie().getJoueurs().get(i).getNom();
+			donnees[i][1]=Integer.toString(controleur.getPartie().getJoueurs().get(i).getMainJoueur().size() );
+			System.out.println(donnees[i][0]+"  "+donnees[i][1]);
+		}
+		
+		String[] cols = {"Nom", "Nombre Cartes"};
+		JTable tab = new JTable(donnees, cols);
+		tab.setEnabled(false);
+		 
+		JScrollPane sp = new JScrollPane(tab);
+		sp.setPreferredSize(new Dimension(200,250));
+		pInfoJoueur.removeAll();
+		pInfoJoueur.add(sp);
+		pInfoJoueur.validate();
+		pInfoJoueur.repaint();
 		this.validate();
 	}
 	@Override
@@ -230,6 +271,8 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		
 		if(o instanceof Joueur){
 			if(arg1 instanceof Carte){
+				Joueur j = (Joueur) o;
+				
 				pTalon.removeAll();
 				Carte c =(Carte) arg1;
 				JButton bCarte = new JButton();
@@ -249,6 +292,8 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				pTalon.add(bCarte);
 				pTalon.getParent().repaint();
 				this.validate();
+				infoJeu.append(j.getNom()+" a pose "+ c.getLabel().name()+" "+c.getCouleur()+"\n");
+				afficherNombreCarte();
 				
 			}
 			else if(arg1.equals("Couleur")){
@@ -260,6 +305,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				Joueur j = (Joueur) o;
 				pMainJoueur.removeAll();
 				int num=0;
+				infoJeu.append("Tour du joueur : "+j.getNom()+"\n");
 				for (Carte c : j.getMainJoueur()){
 					num++;
 					JButton bCarte = new JButton();
@@ -272,6 +318,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				}
 			
 				pMainJoueur.getParent().repaint();
+				afficherNombreCarte();
 				this.validate();
 			}
 			
@@ -288,6 +335,8 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		creerPanelTalon();
 		creerPanelScore();
 		creerFenetreCouleur();
+		creerPanelInfoJeu();
+		creerPanelInfoJoueur();
 	}
 	
 }
