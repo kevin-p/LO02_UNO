@@ -150,7 +150,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		try {
 			int nbBot = Integer.parseInt(JOptionPane.showInputDialog(null, "Entrez le nombre total de Bot")) ;				
 			if(nbBot > 10 || nbBot <0) {
-				JOptionPane.showMessageDialog(null, "Vous avez rentrer trop de Bot. Nombre max de Bot : 7");
+				JOptionPane.showMessageDialog(null, "Vous avez rentrer trop de Bot. Nombre max de Bot : 10");
 				throw new NumberFormatException();
 			}
 			return nbBot;
@@ -169,9 +169,9 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				}
 				return nbHumain;
 			} catch(NumberFormatException e) {					
-				this.getNbHumain();
+				return this.getNbHumain();
 			}
-			return 0;
+			
 		}
 
 	private void creerFenetreCouleur(){

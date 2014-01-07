@@ -28,19 +28,24 @@ public class Controleur implements WindowListener,ActionListener {
 
 
 	public void initialiser(){ // rajouter une exception si le nombre de joueurs est trop grand 
-		int nbHumain=0;
-		int nbBot=0;
+		int nbHumain;
+		int nbBot;
 		do{
+
 			JOptionPane.showMessageDialog(null, "Bienvenue sur le jeu de Uno. Nombre max de joueur : 10");
 			nbHumain = vue.getNbHumain();
+			System.out.println("nbHUMAIN "+nbHumain);
 			nbBot = vue.getNbBot();
 		}while((nbHumain+nbBot)<1||(nbHumain+nbBot)>10);
 
 
 
-		String [] nom = new String[7] ;
+		String [] nom = new String[10] ;
 		for (int i=0;i<nbHumain;i++){
+			do{
 			nom[i]=vue.choixNom(i+1);
+			nom[i]=nom[i].trim();
+			}while(nom[i].equals(""));
 		}
 		partie.initialiserPartie(nbHumain, nbBot, nom);
 		vue.InitialiserVu();
