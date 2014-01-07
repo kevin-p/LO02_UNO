@@ -78,6 +78,7 @@ public class Partie extends Observable{
 			
 		}while(!finPartie);
 		System.out.println("Nombre de manches pour finir a partie :"+nbManche);
+		notifyObservers("Nombre de manches pour finir a partie :"+nbManche+"\n");
 		
 	}
 	

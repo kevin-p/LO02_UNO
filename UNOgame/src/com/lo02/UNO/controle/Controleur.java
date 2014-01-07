@@ -58,7 +58,7 @@ public class Controleur implements WindowListener,ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Manche manche = Manche.getInstanceManche();
-		System.out.println((e.getActionCommand().toString()));
+		//System.out.println((e.getActionCommand().toString()));
 		synchronized (manche.getJoueurCourant()) {
 			if(e.getActionCommand().toString().equals("bleu")||e.getActionCommand().toString().equals("rouge")||e.getActionCommand().toString().equals("jaune")||e.getActionCommand().toString().equals("vert")){
 				if (e.getActionCommand().toString().equals("bleu")){
@@ -81,7 +81,7 @@ public class Controleur implements WindowListener,ActionListener {
 			else{
 
 				int index = Integer.parseInt(e.getActionCommand().toString());
-				System.out.println((e.getActionCommand().toString()));
+				//System.out.println((e.getActionCommand().toString()));
 				manche.getJoueurCourant().setNumCarte(index);
 				manche.getJoueurCourant().notify();}
 

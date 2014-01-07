@@ -180,6 +180,8 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		JPanel pDroite = new JPanel();
 		JPanel pGauche = new JPanel();
 		
+		fChoixCouleur.addWindowListener(controleur);
+		
 		pDroite.setPreferredSize(new Dimension(110,110));
 		pGauche.setPreferredSize(new Dimension(110,110));
 		
@@ -249,7 +251,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		for (int i=0;i<nbJoueur;i++){
 			donnees[i][0]=controleur.getPartie().getJoueurs().get(i).getNom();
 			donnees[i][1]=Integer.toString(controleur.getPartie().getJoueurs().get(i).getMainJoueur().size() );
-			System.out.println(donnees[i][0]+"  "+donnees[i][1]);
+			
 		}
 		
 		String[] cols = {"Nom", "Nombre Cartes"};
@@ -349,7 +351,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		}
 	}
 	
-	public void ajouterMessage(String msg){
+	public void ajouterMessage(String msg) {
 		infoJeu.append(msg);
 	}
 

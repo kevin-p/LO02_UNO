@@ -11,11 +11,14 @@ public class Plus4 extends Carte{
 		this.setLabel(Label.PLUS4);
 	}
 	
+	private boolean posable=true;
+	
 	public void action (Manche manche, Joueur joueur) {
 		if(manche.getJoueurSuivant().isContestPlus4()){
 			joueur.AfficherMain();
 			
 			if(joueur.isLegitimePlus4()){
+				 posable=true;
 				System.out.println("Le plus 4 est légitime le joueur "+manche.getJoueurSuivant().getNom()+" recoit 6 cartes");
 				manche.getJoueurSuivant().piocher(6);
 				this.setCouleur(joueur.choisirCouleur());
@@ -25,18 +28,20 @@ public class Plus4 extends Carte{
 			else{
 				Talon talon = Talon.getInstanceTalon();
 				talon.remove(talon.size()-1);
-				joueur.addCarte(this);
-				System.out.println("Plus 4 non légitime le joueur "+joueur.getNom()+" recoit une penalite");
 				joueur.piocher(2);
+				posable=false;
 			}
 		}
 		else{
+			 posable=true;
 			manche.getJoueurSuivant().piocher(4);
 			this.setCouleur(joueur.choisirCouleur());
 			manche.AvancerJoueur();
 		}
 	}
-	
+	public boolean getPosable(){
+		return posable;
+	}
 	public void reset(){
 		this.setCouleur(Couleur.NOIR);
 	}
