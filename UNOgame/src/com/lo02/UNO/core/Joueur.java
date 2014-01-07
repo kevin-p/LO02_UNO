@@ -181,8 +181,8 @@ public class Joueur extends Observable{
 	 */
 	public void poser(int IndexCarte) {
 		Manche manche = Manche.getInstanceManche();
-		System.out.println("AAAA");AfficherMain();
-		System.out.println("BBBBB");System.out.println("INDEXE"+IndexCarte);
+		
+		
 		if(manche.poserCarte(mainJoueur.get(IndexCarte), this)){
 			System.out.println("Carte pose par "+getNom()+"  "+mainJoueur.get(IndexCarte).getLabel().label()+" | "+mainJoueur.get(IndexCarte).getCouleur());
 			notifyObservers(mainJoueur.get(IndexCarte));
