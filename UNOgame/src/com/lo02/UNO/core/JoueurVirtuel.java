@@ -25,7 +25,8 @@ public class JoueurVirtuel extends Joueur{
 	
 	public void jouer() {
 		boolean aPioche = false;
-		if (getMainJoueur().size()<5) this.bot=new BotAgressif();
+		if (getMainJoueur().size()<4)
+			this.bot=new BotAgressif();
 		if(bot.isPiocher(this)) {
 			piocher(1);
 			aPioche = true;
