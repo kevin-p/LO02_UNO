@@ -58,6 +58,7 @@ public class Partie extends Observable{
 			nbManche++;
 			manche.lancerManche();
 			manche.reset();
+			notifyObservers("Fin de la manche : "+nbManche+"\n");
 			for (Joueur j : joueurs) {
 				if(j.getPoint()>1000){
 					finPartie = true;
@@ -77,6 +78,7 @@ public class Partie extends Observable{
 			
 		}while(!finPartie);
 		System.out.println("Nombre de manches pour finir a partie :"+nbManche);
+		notifyObservers("Nombre de manches pour finir a partie :"+nbManche+"\n");
 		
 	}
 	

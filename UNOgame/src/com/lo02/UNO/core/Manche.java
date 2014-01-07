@@ -127,7 +127,6 @@ public class Manche {
 	 */
 	public void reset() {
 		System.out.println("Fin d'une manche");
-		
 		for (Joueur j : joueurs) {
 			j.detruireMain();
 		}
@@ -224,6 +223,8 @@ public class Manche {
 			talon.add(carte);
 //			System.out.println("juste avant l'action");
 			carte.action(this, joueur);
+			if(carte instanceof Plus4){
+				if(!((Plus4) carte).getPosable()) return false;}
 //			System.out.println("juste après l'action");
 //			System.out.println("carte acceptee");
 			return true;
@@ -239,9 +240,10 @@ public class Manche {
 		//retourner le talon dès qu'il y a 6 cartes ou moins.
 		//Epargner la dernière carte du talon qu'il faut remettre au début. redimensionner
 		//reset les cartes
-		Carte c = talon.remove(0);
+		Carte c = talon.remove(talon.size()-1);
 		Collections.shuffle(talon);
 		pioche.addAll(talon);
+		pioche.resetCarteSpecial();
 		talon.clear();
 		talon.add(c);
 		System.out.println("Le talon a été retourné");

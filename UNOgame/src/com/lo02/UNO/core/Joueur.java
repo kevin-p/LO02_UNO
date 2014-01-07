@@ -33,6 +33,12 @@ public class Joueur extends Observable{
 	private String nom;
 	
 	/**
+	 * @see #isAnnonceUno()
+	 * @see #setAnnonceUno(boolean)
+	 */
+	private boolean annonceUno = false;
+	
+	/**
 	 * Compatabilise le nombre de points d'un {@link Joueur}
 	 * 
 	 * @see #getPoint()
@@ -110,6 +116,7 @@ public class Joueur extends Observable{
 		//int numCarte = 0;
 		
 		ConsoleUI.afficherTalon();
+		notifyObservers("Tour du joueur " +getNom()+"\n");
 		notifyObservers();
 		//numCarte = ConsoleUI.selectionnerCarte(this);
 		int numCarte=choisirIndexCarte();
@@ -117,12 +124,16 @@ public class Joueur extends Observable{
 			poser(numCarte - 1);
 		else {
 			piocher(1);
+			notifyObservers(getNom()+" a pioché\n");
 			notifyObservers();
 			//numCarte = ConsoleUI.selectionnerCarte(this);
 			numCarte=choisirIndexCarte();
 			
-			if(numCarte >= 1 && numCarte <= mainJoueur.size())
+			if(numCarte >= 1 && numCarte <= mainJoueur.size()){
 				poser(numCarte - 1);
+			}
+			else
+				notifyObservers(getNom()+" n'a pas pose de carte durant son tour\n");
 		}
 	}
 	
@@ -170,9 +181,15 @@ public class Joueur extends Observable{
 	 */
 	public void poser(int IndexCarte) {
 		Manche manche = Manche.getInstanceManche();
+		System.out.println("AAAA");AfficherMain();
+		System.out.println("BBBBB");System.out.println("INDEXE"+IndexCarte);
 		if(manche.poserCarte(mainJoueur.get(IndexCarte), this)){
+			System.out.println("Carte pose par "+getNom()+"  "+mainJoueur.get(IndexCarte).getLabel().label()+" | "+mainJoueur.get(IndexCarte).getCouleur());
 			notifyObservers(mainJoueur.get(IndexCarte));
 			mainJoueur.remove(IndexCarte);
+		}
+		else{
+			notifyObservers(getNom()+" a pose une carte invalide : 2 cartes de pénalité\n");
 		}
 			
 		
@@ -263,11 +280,31 @@ public class Joueur extends Observable{
 		for(Carte carte : mainJoueur) {
 			if(carte.getLabel()!= Label.PLUS4 && carte.isPosableSur(talon.get(talon.size()-2))){ // compare toutes les cartes sauf les +4
 				legitime=false;
+				
 			}
 		}
+		if(!legitime)
+			notifyObservers("Le +4 n'était pas légitime "+getNom()+" recoit 2 cartes de pénalité\n");
+		else
+			notifyObservers("Le +4 était légitime ");
 		return legitime;
 		
 	}
+
+	/**
+	 * @return the annonceUno
+	 */
+	public boolean isAnnonceUno() {
+		return annonceUno;
+	}
+
+	/**
+	 * @param annonceUno the annonceUno to set
+	 */
+	public void setAnnonceUno(boolean annonceUno) {
+		this.annonceUno = annonceUno;
+	}
+
 	
 	/**
 	 * 

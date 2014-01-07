@@ -25,10 +25,11 @@ public class JoueurVirtuel extends Joueur{
 	
 	public void jouer() {
 		boolean aPioche = false;
-		
+		if (getMainJoueur().size()<5) this.bot=new BotAgressif();
 		if(bot.isPiocher(this)) {
 			piocher(1);
 			aPioche = true;
+			notifyObservers(getNom()+" a pioché\n");
 			System.out.println(this.getNom()+" a pioché");
 		}
 		
@@ -42,6 +43,7 @@ public class JoueurVirtuel extends Joueur{
 		}
 		else if (!aPioche) {
 			piocher(1);
+			notifyObservers(getNom()+" a pioché\n");
 			System.out.println(this.getNom()+" a pioché");
 		}
 		

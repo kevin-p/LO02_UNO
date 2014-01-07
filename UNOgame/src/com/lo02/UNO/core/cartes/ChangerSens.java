@@ -12,5 +12,8 @@ public class ChangerSens extends Carte{
 	
 	public void action (Manche manche, Joueur joueur) {
 		manche.changeSens();
+		if(manche.getJoueurs().size()==2){
+			manche.AvancerJoueur();
+		}
 	}
 }
