@@ -1,5 +1,6 @@
 com.lo02.UNO
 com.lo02.UNO.GUI
+com.lo02.UNO.controle
 com.lo02.UNO.core
 com.lo02.UNO.core.cartes
 com.lo02.UNOTest

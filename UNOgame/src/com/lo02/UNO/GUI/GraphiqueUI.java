@@ -24,7 +24,7 @@ import com.lo02.UNO.core.Joueur;
 import com.lo02.UNO.core.cartes.Carte;
 /**
  * 
- * @author 
+ * @author
  *
  */
 
@@ -37,9 +37,11 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	private JPanel pTalon;
 	private JPanel pScore;
 	private JPanel pCentral;
+	private JPanel pSud;
 	private JPanel pInfoJoueur;
 	private JFrame fChoixCouleur;
 	private TextArea infoJeu;
+	private JScrollPane spMainJoueur;
 	
 
 	public GraphiqueUI(String titre,Controleur controleur){
@@ -66,7 +68,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		pScore = new JPanel();
 
 		pScore.setBorder(BorderFactory.createTitledBorder(" Scores"));
-		pScore.setPreferredSize(new Dimension(getWidth(), 300));
+		pScore.setPreferredSize(new Dimension(getWidth(), 220));
 		this.add(pScore,BorderLayout.NORTH);
 	}
 	
@@ -93,12 +95,15 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	
 	private void  creerPanelMainJoueur(){
 		pMainJoueur=new JPanel();
-		pMainJoueur.setBorder(BorderFactory.createTitledBorder(" Votre jeu"));
-		
+		pMainJoueur.setSize(new Dimension(this.getWidth(),200));
+
 		for (Joueur j : controleur.getPartie().getJoueurs()){
 				j.addObserver(this);
 			}
-		this.add(pMainJoueur,BorderLayout.SOUTH);
+		pSud = new JPanel();
+		pSud.setBorder(BorderFactory.createTitledBorder(" Votre jeu"));
+		pSud.setSize(new Dimension(getWidth(),(int)(getHeight()*0.35)));
+		this.add(pSud,BorderLayout.SOUTH);
 	}
 
 	private void place() {
@@ -175,6 +180,8 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		JPanel pDroite = new JPanel();
 		JPanel pGauche = new JPanel();
 		
+		fChoixCouleur.addWindowListener(controleur);
+		
 		pDroite.setPreferredSize(new Dimension(110,110));
 		pGauche.setPreferredSize(new Dimension(110,110));
 		
@@ -228,7 +235,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		tab.setEnabled(false);
 		 
 		JScrollPane sp = new JScrollPane(tab);
-		sp.setPreferredSize(new Dimension(200,250));
+		sp.setPreferredSize(new Dimension(200,200));
 		pScore.removeAll();
 		pScore.add(sp);
 		pScore.validate();
@@ -244,7 +251,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		for (int i=0;i<nbJoueur;i++){
 			donnees[i][0]=controleur.getPartie().getJoueurs().get(i).getNom();
 			donnees[i][1]=Integer.toString(controleur.getPartie().getJoueurs().get(i).getMainJoueur().size() );
-			System.out.println(donnees[i][0]+"  "+donnees[i][1]);
+			
 		}
 		
 		String[] cols = {"Nom", "Nombre Cartes"};
@@ -252,12 +259,65 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		tab.setEnabled(false);
 		 
 		JScrollPane sp = new JScrollPane(tab);
-		sp.setPreferredSize(new Dimension(200,250));
+		sp.setPreferredSize(new Dimension(200,200));
 		pInfoJoueur.removeAll();
 		pInfoJoueur.add(sp);
 		pInfoJoueur.validate();
 		pInfoJoueur.repaint();
 		this.validate();
+	}
+	
+	private void actualiserMainJoueur(Observable o){
+		Joueur j = (Joueur) o;
+		pMainJoueur.removeAll();
+		pSud.removeAll();
+		int num=0;
+		//infoJeu.append("Tour du joueur : "+j.getNom()+"\n");
+		for (Carte c : j.getMainJoueur()){
+			num++;
+			JButton bCarte = new JButton();
+			ImageIcon iconImg = new ImageIcon(new ImageIcon("img/" + c.getLabel() + "-" + c.getCouleur() + ".jpg")
+												.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
+			bCarte.setIcon(iconImg);
+			bCarte.setActionCommand(Integer.toString(num));
+			bCarte.addActionListener(controleur);
+			pMainJoueur.add(bCarte);
+			
+		}
+		spMainJoueur = new JScrollPane(pMainJoueur);
+		
+		spMainJoueur.setPreferredSize(new Dimension(this.getWidth(),150));
+		pSud.add(spMainJoueur);
+		pSud.repaint();
+		pSud.validate();
+		afficherNombreCarte();
+		this.validate();
+	}
+	
+	private void actualiserTalon(Observable o,Object arg1){
+		Joueur j = (Joueur) o;
+		
+		pTalon.removeAll();
+		Carte c =(Carte) arg1;
+		JButton bCarte = new JButton();
+		ImageIcon iconImg = new ImageIcon(new ImageIcon("img/" + c.getLabel() + "-" + c.getCouleur() + ".jpg")
+											.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
+		bCarte.setIcon(iconImg);
+		bCarte.setVisible(true);
+		switch (c.getCouleur()) {
+		case BLEU: bCarte.setBackground(Color.blue);break;
+		case ROUGE: bCarte.setBackground(Color.red);break;
+		case JAUNE: bCarte.setBackground(Color.yellow);break;
+		case VERT: bCarte.setBackground(Color.green);break;
+
+		default:
+			break;
+		}
+		pTalon.add(bCarte);
+		pTalon.getParent().repaint();
+		this.validate();
+		infoJeu.append(j.getNom()+" a pose "+ c.getLabel().name()+" "+c.getCouleur()+"\n");
+		afficherNombreCarte();
 	}
 	@Override
 	
@@ -267,34 +327,14 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		// TODO Auto-generated method stub
 		this.setEnabled(true);
 		fChoixCouleur.setVisible(false);
-
+		 
+		if(arg1 instanceof String && !arg1.equals("Couleur")){
+				ajouterMessage((String)arg1);
+			}
 		
 		if(o instanceof Joueur){
 			if(arg1 instanceof Carte){
-				Joueur j = (Joueur) o;
-				
-				pTalon.removeAll();
-				Carte c =(Carte) arg1;
-				JButton bCarte = new JButton();
-				ImageIcon iconImg = new ImageIcon(new ImageIcon("img/" + c.getLabel() + "-" + c.getCouleur() + ".jpg")
-													.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
-				bCarte.setIcon(iconImg);
-				bCarte.setVisible(true);
-				switch (c.getCouleur()) {
-				case BLEU: bCarte.setBackground(Color.blue);break;
-				case ROUGE: bCarte.setBackground(Color.red);break;
-				case JAUNE: bCarte.setBackground(Color.yellow);break;
-				case VERT: bCarte.setBackground(Color.green);break;
-
-				default:
-					break;
-				}
-				pTalon.add(bCarte);
-				pTalon.getParent().repaint();
-				this.validate();
-				infoJeu.append(j.getNom()+" a pose "+ c.getLabel().name()+" "+c.getCouleur()+"\n");
-				afficherNombreCarte();
-				
+				actualiserTalon(o, arg1);				
 			}
 			else if(arg1.equals("Couleur")){
 				fChoixCouleur.setVisible(true);
@@ -302,30 +342,17 @@ public class GraphiqueUI extends JFrame implements IObservable {
 				
 			}
 			else{
-				Joueur j = (Joueur) o;
-				pMainJoueur.removeAll();
-				int num=0;
-				infoJeu.append("Tour du joueur : "+j.getNom()+"\n");
-				for (Carte c : j.getMainJoueur()){
-					num++;
-					JButton bCarte = new JButton();
-					ImageIcon iconImg = new ImageIcon(new ImageIcon("img/" + c.getLabel() + "-" + c.getCouleur() + ".jpg")
-														.getImage().getScaledInstance(60, 90, Image.SCALE_DEFAULT));
-					bCarte.setIcon(iconImg);
-					bCarte.setActionCommand(Integer.toString(num));
-					bCarte.addActionListener(controleur);
-					pMainJoueur.add(bCarte);
+				actualiserMainJoueur(o);
 				}
-			
-				pMainJoueur.getParent().repaint();
-				afficherNombreCarte();
-				this.validate();
-			}
 			
 		}else {
 		
 			afficherScore();
 		}
+	}
+	
+	public void ajouterMessage(String msg) {
+		infoJeu.append(msg);
 	}
 
 	@Override
