@@ -1,7 +1,7 @@
 /**
  * 
- */
-/**
+ * Contient toute les classes des cartes
+ * 
  * @author kevin
  *
  */

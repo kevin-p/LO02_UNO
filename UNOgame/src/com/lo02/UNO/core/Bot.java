@@ -1,7 +1,13 @@
 package com.lo02.UNO.core;
 
 import com.lo02.UNO.core.cartes.Couleur;
-
+/**
+ * 
+ * Classe mère pour les différentes implémentation des bots
+ * 
+ * @author Kevin
+ *
+ */
 public class Bot implements Strategie{
 
 	@Override

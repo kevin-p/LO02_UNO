@@ -2,7 +2,13 @@ package com.lo02.UNO.core.cartes;
 
 import com.lo02.UNO.core.Joueur;
 import com.lo02.UNO.core.Manche;
-
+/**
+ * 
+ * La carte Plus 2
+ * 
+ * @author Kevin
+ *
+ */
 public class Plus2 extends Carte{
 	
 	public Plus2(Couleur couleur) {

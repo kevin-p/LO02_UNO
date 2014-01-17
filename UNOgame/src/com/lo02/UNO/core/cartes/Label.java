@@ -1,5 +1,11 @@
 package com.lo02.UNO.core.cartes;
-
+/**
+ * 
+ * Les différent label des cartes de UNO sous forme d'énumérateur
+ * 
+ * @author Kevin
+ *
+ */
 public enum Label {
 	ZERO ("0", 0),
 	UN ("1", 1),

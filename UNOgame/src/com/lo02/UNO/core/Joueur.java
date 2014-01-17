@@ -57,7 +57,6 @@ public class Joueur extends Observable{
 	
 	/**
 	 * indexe de la carte selectionner par le joueur
-	 * @see #choisirIndex()
 	 */
 	private int index=-1;
 	/**
@@ -405,7 +404,6 @@ public class Joueur extends Observable{
 	 * 
 	 * @see Joueur#poser(int)
 	 * @see Joueur#isLegitimePlus4()
-	 * @see Joueur#choixCouleur()
 	 */
 	public void notifyObservers(Object arg) {
 

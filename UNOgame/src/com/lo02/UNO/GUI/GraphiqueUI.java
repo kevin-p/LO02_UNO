@@ -3,7 +3,6 @@ package com.lo02.UNO.GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.TextArea;
 import java.awt.Toolkit;
@@ -12,7 +11,6 @@ import java.util.Observable;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -36,6 +34,10 @@ import com.lo02.UNO.core.cartes.Plus4;
 
 public class GraphiqueUI extends JFrame implements IObservable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6453904254563027577L;
 	private Controleur controleur; 
 	private JPanel pInfoJeu;
 	private JPanel pMainJoueur;
@@ -289,7 +291,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	}
 	/**
 	 * Creer un boutton pour chaque carte du {@link Joueur} 
-	 * @param Joueur
+	 * @param o Observable joueur
 	 */
 	private void actualiserMainJoueur(Observable o){
 		Joueur j = (Joueur) o;
@@ -319,8 +321,8 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	}
 	/**
 	 * Affiche la dernier {@link Carte} poser sur le talon
-	 * @param Joueur
-	 * @param Carte
+	 * @param o Observable joueur
+	 * @param arg1 Object carte
 	 */
 	private void actualiserTalon(Observable o,Object arg1){
 		Joueur j = (Joueur) o;

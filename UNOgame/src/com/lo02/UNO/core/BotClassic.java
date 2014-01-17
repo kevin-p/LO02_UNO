@@ -10,7 +10,13 @@ import java.util.TreeSet;
 
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
-
+/**
+ * 
+ * IA n'ayant pas de directive de jeu particulière
+ * 
+ * @author Kevin
+ *
+ */
 public class BotClassic extends Bot{
 	
 	public boolean isPiocher(Joueur joueur) {

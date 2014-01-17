@@ -3,6 +3,13 @@ package com.lo02.UNO.core.cartes;
 import com.lo02.UNO.core.Joueur;
 import com.lo02.UNO.core.Manche;
 import com.lo02.UNO.core.Talon;
+/**
+ * 
+ * La carte Plus 4
+ * 
+ * @author Kevin
+ *
+ */
 
 public class Plus4 extends Carte{
 	

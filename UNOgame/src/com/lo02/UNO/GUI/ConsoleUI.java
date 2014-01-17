@@ -3,7 +3,6 @@ package com.lo02.UNO.GUI;
 import java.util.Scanner;
 
 import com.lo02.UNO.core.Joueur;
-import com.lo02.UNO.core.Partie;
 import com.lo02.UNO.core.Talon;
 import com.lo02.UNO.core.cartes.Couleur;
 

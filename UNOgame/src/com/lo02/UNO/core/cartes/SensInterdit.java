@@ -2,6 +2,14 @@ package com.lo02.UNO.core.cartes;
 
 import com.lo02.UNO.core.*;;
 
+/**
+ * 
+ * La carte Sens Interdit
+ * 
+ * @author Kevin
+ *
+ */
+
 public class SensInterdit extends Carte{
 	
 	public SensInterdit (Couleur couleur) {

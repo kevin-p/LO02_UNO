@@ -12,6 +12,14 @@ import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
 import com.lo02.UNO.core.cartes.Label;
 
+/**
+ * 
+ * Contient des méthode testant des fonctionnalité particulière du core
+ * 
+ * @author Kevin
+ *
+ */
+
 public class Test {
 
 	public static void TestLabel () {

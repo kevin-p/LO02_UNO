@@ -2,7 +2,13 @@ package com.lo02.UNO.core;
 
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
-
+/**
+ * 
+ * IA ayant un comportement de jeu agressif
+ * 
+ * @author Kevin
+ *
+ */
 public class BotAgressif extends Bot{
 	
 	public boolean isPiocher(Joueur joueur) {

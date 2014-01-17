@@ -2,7 +2,13 @@ package com.lo02.UNO.core;
 
 import com.lo02.UNO.GUI.ConsoleUI;
 import com.lo02.UNO.core.cartes.Couleur;
-
+/**
+ * 
+ * Gère le comportement général des bot au cours de la partie
+ * 
+ * @author Kevin
+ *
+ */
 public class JoueurVirtuel extends Joueur{
 	
 	private static int compteur = 0;
