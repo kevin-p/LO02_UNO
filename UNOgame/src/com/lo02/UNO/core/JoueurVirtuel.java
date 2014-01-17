@@ -15,11 +15,6 @@ public class JoueurVirtuel extends Joueur{
 	
 	public void choisirNiveau(String niveau) {
 		
-		/*if(niveau.equals("Agressif") || niveau.equals("A") || niveau.equals("a"))
-			bot = new BotClassic();
-		if(niveau.equals("Passif") || niveau.equals("P") || niveau.equals("p"))
-			bot = new BotClassic();
-		else*/
 			bot = new BotClassic();
 	}
 	
@@ -27,6 +22,8 @@ public class JoueurVirtuel extends Joueur{
 		boolean aPioche = false;
 		if (getMainJoueur().size()<4)
 			this.bot=new BotAgressif();
+		else
+			this.bot= new BotClassic();
 		if(bot.isPiocher(this)) {
 			piocher(1);
 			aPioche = true;
@@ -47,10 +44,7 @@ public class JoueurVirtuel extends Joueur{
 			notifyObservers(getNom()+" a pioché\n");
 			System.out.println(this.getNom()+" a pioché");
 		}
-		
-		if(bot.annncerUNO(this)) {
-			//annoncer UNO, non géré dans la CLI
-		}
+
 	}
 	
 	public Couleur choisirCouleur() {

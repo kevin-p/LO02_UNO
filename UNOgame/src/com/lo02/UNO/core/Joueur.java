@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 
 import com.lo02.UNO.GUI.ConsoleUI;
+import com.lo02.UNO.GUI.GraphiqueUI;
 import com.lo02.UNO.controle.Controleur;
 import com.lo02.UNO.core.cartes.Carte;
 import com.lo02.UNO.core.cartes.Couleur;
@@ -31,12 +32,7 @@ public class Joueur extends Observable{
 	 * @see #setNom(String)
 	 */
 	private String nom;
-	
-	/**
-	 * @see #isAnnonceUno()
-	 * @see #setAnnonceUno(boolean)
-	 */
-	private boolean annonceUno = false;
+
 	
 	/**
 	 * Compatabilise le nombre de points d'un {@link Joueur}
@@ -291,32 +287,14 @@ public class Joueur extends Observable{
 		
 	}
 
-	/**
-	 * @return the annonceUno
-	 */
-	public boolean isAnnonceUno() {
-		return annonceUno;
-	}
-
-	/**
-	 * @param annonceUno the annonceUno to set
-	 */
-	public void setAnnonceUno(boolean annonceUno) {
-		this.annonceUno = annonceUno;
-	}
-
 	
 	/**
 	 * 
 	 * Compte les points de la main d'un joueur et les ajoute aux points du joueur pour la partie courante
 	 * 
 	 * @see Manche#CompterPoint(Joueur)
-	 *//*
-	public void compterPoint(){
-		for(Carte carte : mainJoueur) {
-			point+=carte.getLabel().valeur();
-		}
-	}*/
+	 */
+
 	
 	public void addPoint(int points){
 		this.point += points;
@@ -411,6 +389,9 @@ public class Joueur extends Observable{
 		return mainJoueur;
 	}
 	
+	/**
+	 * Notifie la {@link GraphiqueUI} lors d'un changement de {@link Joueur}
+	 */
 	public void notifyObservers() {
 
 		 for (Observer ob : observers) {
@@ -418,7 +399,14 @@ public class Joueur extends Observable{
 		 }
 		 	 
 	}
-	
+	/**
+	 * Notifie la {@link GraphiqueUI} lorsqu'une {@link Carte} est jouée, de la légitimé d'un +4, du choix d'une couleur
+	 * 
+	 * 
+	 * @see Joueur#poser(int)
+	 * @see Joueur#isLegitimePlus4()
+	 * @see Joueur#choixCouleur()
+	 */
 	public void notifyObservers(Object arg) {
 
 		 for (Observer ob : observers) {
@@ -427,12 +415,17 @@ public class Joueur extends Observable{
 		 	 
 	}
 	
-
+/**
+ * Ajout une vue à liste des observeurs
+ */
 	public void addObserver(Observer observer) {
 		 observers.add(observer);
 		
 	}
-
+/**
+ * Supprime un observeur à la liste des observeurs
+ * @param observer
+ */
 	public void removeObserver(Observer observer) {
 		 observers.remove(observer);
 		

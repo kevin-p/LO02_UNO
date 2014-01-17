@@ -19,7 +19,6 @@ public class BotAgressif extends Bot{
 	public int choisirIndexCarte(Joueur joueur) {
 		
 		Carte carteVisible = Talon.getInstanceTalon().getLast();
-//		joueur.AfficherMain();
 		for(Carte c : joueur.getMainJoueur()) {
 			if (c.isPosableSur(carteVisible))
 				return joueur.getMainJoueur().indexOf(c);
