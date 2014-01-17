@@ -5,28 +5,29 @@ import java.util.Observable;
 import java.util.Observer;
 
 import com.lo02.UNO.GUI.ConsoleUI;
-
+import com.lo02.UNO.GUI.GraphiqueUI;
+import com.lo02.UNO.controle.Controleur;
+/**
+ * 
+ * Contient la liste des {@link Joueur}
+ * Lance les {@link Manche} et notifie la {@link GraphiqueUI} lorsqu'elles sont finies 
+ * 
+ *
+ */
 public class Partie extends Observable{
 	private ArrayList<Joueur> joueurs;
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
-/*	public Partie () {
-		joueurs = new ArrayList<Joueur>();
-		int nombreJoueur = ConsoleUI.choisirNbHumain();
-		for (int i = 0; i < nombreJoueur; ++i){
-			joueurs.add(new Joueur(ConsoleUI.nommerJoueur(i)));
-		}
-		
-		int nombreBot = ConsoleUI.choisirNbBot();
-		
-		for (int i = 0; i < nombreBot; ++i) {
-			joueurs.add(new JoueurVirtuel());
-		}
-	}
-*/
 	public Partie(){
 		
 	}
+	/**
+	 * Initialise la partie avec les données renvoyées par le {@link Controleur}
+	 * @see Controleur#initialiser()
+	 * @param nbHumain
+	 * @param nbBot
+	 * @param nom
+	 */
 	public void initialiserPartie(int nbHumain,int nbBot,String []nom){
 		joueurs = new ArrayList<Joueur>();
 		int nombreJoueurHumain = nbHumain;
@@ -50,8 +51,6 @@ public class Partie extends Observable{
 		
 		Manche manche = Manche.getInstanceManche();
 		manche.setJoueurs(joueurs);
-		//manche.distribuerCarte();
-
 		int nbManche=0;
 		manche.distribuerCarte();
 		do{
@@ -78,10 +77,12 @@ public class Partie extends Observable{
 			
 		}while(!finPartie);
 		System.out.println("Nombre de manches pour finir a partie :"+nbManche);
-		notifyObservers("Nombre de manches pour finir a partie :"+nbManche+"\n");
-		
+		notifyObservers("Nombre de manches pour finir a partie :"+nbManche+"\n");		
 	}
-	
+	/**
+	 * 
+	 * @return {@link Joueur}
+	 */
 	public ArrayList<Joueur> getJoueurs() {
 		return joueurs;
 	}

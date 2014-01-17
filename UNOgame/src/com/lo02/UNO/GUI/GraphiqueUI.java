@@ -21,10 +21,16 @@ import javax.swing.JTable;
 
 import com.lo02.UNO.controle.Controleur;
 import com.lo02.UNO.core.Joueur;
+import com.lo02.UNO.core.JoueurVirtuel;
+import com.lo02.UNO.core.Manche;
 import com.lo02.UNO.core.cartes.Carte;
+import com.lo02.UNO.core.cartes.Joker;
+import com.lo02.UNO.core.cartes.Plus4;
 /**
  * 
  * @author
+ * Représente la vue graphique du jeu de UNO
+ * Recoit les notifications du modèle et donnes les informations au controleur
  *
  */
 
@@ -49,10 +55,9 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		this.controleur=controleur;
 		this.addWindowListener(controleur);
 		controleur.getPartie().addObserver(this);
-
-		
 		place();
 		}
+	
 	private void creerPanelInfoJeu(){
 		pInfoJeu = new JPanel();
 		infoJeu = new TextArea();
@@ -92,7 +97,9 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		pCentral.add(pTalon,BorderLayout.CENTER);
 		this.add(pCentral,BorderLayout.CENTER);
 	}
-	
+	/**
+	 * Affiche la liste des {@link Carte} d'un {@link Joueur}
+	 */
 	private void  creerPanelMainJoueur(){
 		pMainJoueur=new JPanel();
 		pMainJoueur.setSize(new Dimension(this.getWidth(),200));
@@ -105,7 +112,9 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		pSud.setSize(new Dimension(getWidth(),(int)(getHeight()*0.35)));
 		this.add(pSud,BorderLayout.SOUTH);
 	}
-
+/**
+ * Dimensionne et place la fenetre en fonction de l'écran 
+ */
 	private void place() {
 
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -134,7 +143,7 @@ public class GraphiqueUI extends JFrame implements IObservable {
 
 	}
 
-	@Override
+
 	public String choixNom(int i) {
 		try {
 			return JOptionPane.showInputDialog(null, "Entrez le nom du joueur numero "+i) ;
@@ -145,7 +154,10 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		return "";
 	}
 
-	@Override
+	
+	/**
+	 * Retourne le nombre de {@link JoueurVirtuel}
+	*/
 	public int getNbBot() {
 		try {
 			int nbBot = Integer.parseInt(JOptionPane.showInputDialog(null, "Entrez le nombre total de Bot")) ;				
@@ -173,7 +185,10 @@ public class GraphiqueUI extends JFrame implements IObservable {
 			}
 			
 		}
-
+/**
+ * Affiche la fenetre pour choisir la couleur d'un {@link Plus4} {@link Joker}
+ * Choix d'une couleur en cliquant sur un des bouttons de la couleur voulue
+ */
 	private void creerFenetreCouleur(){
 				
 		fChoixCouleur = new JFrame();
@@ -219,6 +234,10 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	
 
 	}
+	/**
+	 * Donne le score de chaque {@link Joueur} à la fin de chaque {@link Manche}
+	 * @see Manche#CompterPoint(Joueur)
+	 */
 	public void afficherScore(){
 
 		int nbJoueur =controleur.getPartie().getJoueurs().size();
@@ -242,7 +261,9 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		pScore.repaint();
 		this.validate();
 	}
-	
+	/**
+	 * Affiche le nombre de carte de chaque {@link Joueur}
+	 */
 	public void afficherNombreCarte(){
 
 		int nbJoueur =controleur.getPartie().getJoueurs().size();
@@ -266,7 +287,10 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		pInfoJoueur.repaint();
 		this.validate();
 	}
-	
+	/**
+	 * Creer un boutton pour chaque carte du {@link Joueur} 
+	 * @param Joueur
+	 */
 	private void actualiserMainJoueur(Observable o){
 		Joueur j = (Joueur) o;
 		pMainJoueur.removeAll();
@@ -293,7 +317,11 @@ public class GraphiqueUI extends JFrame implements IObservable {
 		afficherNombreCarte();
 		this.validate();
 	}
-	
+	/**
+	 * Affiche la dernier {@link Carte} poser sur le talon
+	 * @param Joueur
+	 * @param Carte
+	 */
 	private void actualiserTalon(Observable o,Object arg1){
 		Joueur j = (Joueur) o;
 		
@@ -322,7 +350,13 @@ public class GraphiqueUI extends JFrame implements IObservable {
 	@Override
 	
 	
-
+/**
+ *  Modifie la vue en fonction des parametre recu et affiche les informations à l'écran
+ *  @see actualiserTalon(Observable o,Object arg1)
+ *  @see actualiserMainJoueur(Observable o)
+ *  @see afficherScore()
+ *  @see ajouterMessage(String msg)
+ */
 	public void update(Observable o, Object arg1) {
 		// TODO Auto-generated method stub
 		this.setEnabled(true);

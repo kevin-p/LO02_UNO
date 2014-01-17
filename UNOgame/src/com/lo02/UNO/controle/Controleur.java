@@ -7,10 +7,17 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JOptionPane;
 
+import com.lo02.UNO.GUI.GraphiqueUI;
 import com.lo02.UNO.GUI.IObservable;
 import com.lo02.UNO.core.Manche;
 import com.lo02.UNO.core.Partie;
 import com.lo02.UNO.core.cartes.Couleur;
+/**
+ * Regroupe tous les {@link ActionListener} et {@link WindowListener}
+ * Initialise la partie et fait le lien entre la {@link GraphiqueUI} et le modèle
+ * @author Etienne
+ *
+ */
 
 public class Controleur implements WindowListener,ActionListener {
 
@@ -26,7 +33,9 @@ public class Controleur implements WindowListener,ActionListener {
 		this.vue=vue;
 	}
 
-
+/**
+ * Demande le nombre de joueur, vérifie la cohérence des choix
+ */
 	public void initialiser(){ // rajouter une exception si le nombre de joueurs est trop grand 
 		int nbHumain;
 		int nbBot;
@@ -52,14 +61,19 @@ public class Controleur implements WindowListener,ActionListener {
 		partie.lancerPartie();
 		//vue.afficherScore();
 	}
-
+/**
+ * 
+ * @return {@link Partie}
+ */
 	public Partie getPartie(){
 		return partie;
 	}
 
 	@Override
 
-
+/**
+ * Indique au modèle le choix de la couleur ou la carte joueur par un joueur
+ */
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Manche manche = Manche.getInstanceManche();
@@ -86,7 +100,6 @@ public class Controleur implements WindowListener,ActionListener {
 			else{
 
 				int index = Integer.parseInt(e.getActionCommand().toString());
-				//System.out.println((e.getActionCommand().toString()));
 				manche.getJoueurCourant().setNumCarte(index);
 				manche.getJoueurCourant().notify();}
 

@@ -153,15 +153,8 @@ public class Manche {
 		do{
 			talon.add(pioche.remove(0));
 			joueurs.get(joueurCourrant).notifyObservers(talon.getLast());
-//			System.out.println("Taille du talon en début de jeu "+talon.size());
-//			talon.getLast().afficher();System.out.println(" Ajouter au talon");
-			
-			
+	
 		}while(talon.getLast().getLabel()== Label.PLUS4);
-		
-//		System.out.println(	joueurs.get(joueurCourrant).getNom() + ", " +
-//							joueurs.get(joueurCourrant).getNbCarte() + " cartes");
-//		talon.getLast().afficher(); System.out.println(); System.out.println();
 		
 		if(talon.getLast().getLabel()==Label.PLUS2){
 			ReculerJoueur();
@@ -176,7 +169,6 @@ public class Manche {
 			joueurs.get(joueurCourrant).jouer();
 			AvancerJoueur();
 			
-			//remplacer par exception
 			for (Joueur j : joueurs) {
 				if(j.getNbCarte() == 0){
 					mancheFinie = true;
@@ -184,9 +176,7 @@ public class Manche {
 				}
 					
 			}
-		}while(!mancheFinie);
-//		System.out.println("Fin de la manche");
-		
+		}while(!mancheFinie);		
 	}
 	/**
 	 * Compte les points de chaque {@link Joueur} en fin de manche
@@ -210,9 +200,6 @@ public class Manche {
 	 * @see Joueur#poser(int)
 	 */
 	public boolean poserCarte(Carte carte, Joueur joueur) {
-//		System.out.println("haut du tas");
-//		talon.getLast().afficher();
-//		System.out.println(" | fin haut du tas");
 
 		if (!carte.isPosableSur(talon.getLast())) {
 			joueur.piocher(2);
@@ -221,12 +208,9 @@ public class Manche {
 		}
 		else {
 			talon.add(carte);
-//			System.out.println("juste avant l'action");
 			carte.action(this, joueur);
 			if(carte instanceof Plus4){
 				if(!((Plus4) carte).getPosable()) return false;}
-//			System.out.println("juste après l'action");
-//			System.out.println("carte acceptee");
 			return true;
 		}
 	}
@@ -294,9 +278,8 @@ public class Manche {
 	 * 
 	 */
 	public void distribuerCarte () {
-//		System.out.println("distribution Ã  : " + this.joueurs.size());
 		for (Joueur j : this.joueurs) {
-//			System.out.println(j.getNom());
+
 			j.piocher(7);
 		}
 	}
@@ -320,9 +303,7 @@ public class Manche {
 	 * @param joueurs {@link ArrayList} {@link Joueur}
 	 */
 	public void setJoueurs(ArrayList<Joueur> joueurs) {
-//		System.out.println("ajout des joueurs");
 		this.joueurs.addAll(joueurs);
-//		System.out.println("nb joueurs : " + this.joueurs.size());
 	}
 	
 	/**

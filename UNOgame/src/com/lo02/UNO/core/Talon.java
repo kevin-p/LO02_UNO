@@ -32,8 +32,6 @@ public class Talon extends ArrayList<Carte> {
 	 * 
 	 */
 	private Talon() {
-		//this.add(new SpecialCarte());
-//		System.out.println(this.size());
 	}
 	
 	/**

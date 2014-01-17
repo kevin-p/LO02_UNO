@@ -12,7 +12,15 @@ public class Plus4 extends Carte{
 	}
 	
 	private boolean posable=true;
-	
+	/**
+	 * 
+	 * Demande vérification pour savoir si la carte est contester et si elle est légitime
+	 * @param manche
+	 * @param joueur
+	 * 
+	 * @see Joueur#isContestPlus4()
+	 * @see Joueur#isLegitimePlus4()
+	 */
 	public void action (Manche manche, Joueur joueur) {
 		if(manche.getJoueurSuivant().isContestPlus4()){
 			joueur.AfficherMain();
